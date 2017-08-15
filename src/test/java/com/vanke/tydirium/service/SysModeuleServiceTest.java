@@ -1,6 +1,8 @@
 package com.vanke.tydirium.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.vanke.tydirium.entity.sys.SysModule;
+import com.vanke.tydirium.entity.sys.SysResource;
 import com.vanke.tydirium.service.sys.SysModuleService;
 
 
@@ -57,6 +60,14 @@ public class SysModeuleServiceTest {
 		Page<SysModule> pages = SysModeulService.findAll(pageable);
 		List<SysModule> list = pages.getContent();
 		Assert.assertEquals(10, list.size());
+	}
+	
+	@Test
+	public void testCollection(){
+		Set<Long> temp = new HashSet<>();
+		temp.add(moduleId);
+		Set<SysModule> resource = SysModeulService.findByModuleIdIn(temp);
+		Assert.assertNotNull(resource);
 	}
 	
 	@Test

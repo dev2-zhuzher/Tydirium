@@ -19867,3 +19867,231 @@ Unconditional classes:
 2017-08-15 15:31:36.563  INFO 12744 --- [Thread-5] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@55b53d44: startup date [Tue Aug 15 15:31:30 CST 2017]; root of context hierarchy
 2017-08-15 15:31:36.565  INFO 12744 --- [Thread-5] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
 2017-08-15 15:31:36.575  INFO 12744 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:54:19.989  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : Starting SysResourceServiceTest on zhangmy16-szzbd with PID 8680 (started by v-guosq02 in D:\MyParcel\Tydirium)
+2017-08-15 15:54:19.990 DEBUG 8680 --- [main] c.v.t.service.SysResourceServiceTest     : Running with Spring Boot v1.5.4.RELEASE, Spring v4.3.9.RELEASE
+2017-08-15 15:54:19.990  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : No active profile set, falling back to default profiles: default
+2017-08-15 15:54:20.025  INFO 8680 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@482bce4f: startup date [Tue Aug 15 15:54:20 CST 2017]; root of context hierarchy
+2017-08-15 15:54:20.708  INFO 8680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 15:54:20.781  INFO 8680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 15:54:20.811  INFO 8680 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysModuleRepository.
+2017-08-15 15:54:20.814  INFO 8680 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysResourceRepository.
+2017-08-15 15:54:20.814  INFO 8680 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysRoleRepository.
+2017-08-15 15:54:20.816  INFO 8680 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysUserRepository.
+2017-08-15 15:54:22.177  INFO 8680 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:54:23.546  INFO 8680 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:54:24.544  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@482bce4f: startup date [Tue Aug 15 15:54:20 CST 2017]; root of context hierarchy
+2017-08-15 15:54:24.614  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/session],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.session(javax.servlet.http.HttpSession)
+2017-08-15 15:54:24.615  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/hello],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.hello(javax.servlet.http.HttpServletRequest)
+2017-08-15 15:54:24.617  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysModule,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.618  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module/{moduleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.618  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysResource,org.springframework.validation.BindingResult) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.618  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource/{resourceId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.618  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysRole,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.619  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role/{roleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.619  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resources],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resources(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.619  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/roles],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.roles(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.619  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/checkRoleName],methods=[GET]}" onto public java.lang.Boolean com.vanke.tydirium.web.controller.sys.SysController.chenckRoleName(java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.619  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/modules],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.modules(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.620  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysUser,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.620  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/users],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.620  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user/{userId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:54:24.624  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-15 15:54:24.624  INFO 8680 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-15 15:54:24.652  INFO 8680 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:54:24.652  INFO 8680 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:54:24.685  INFO 8680 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:54:24.948  INFO 8680 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2017-08-15 15:54:24.957  INFO 8680 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2017-08-15 15:54:24.967  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : Started SysResourceServiceTest in 5.211 seconds (JVM running for 5.875)
+2017-08-15 15:54:25.006  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.006  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.113  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.114  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.128  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.128  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.137  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.138  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.147  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.147  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.155  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.155  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.164  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.164  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.173  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.174  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.183  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.184  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.193  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.193  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.309  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.309  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.326  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.327  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.336  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.336  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.347  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.347  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.356  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.356  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.368  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.368  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.380  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.381  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.389  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.390  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.400  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.400  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.410  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.410  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.435  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.436  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.456  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.457  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.466  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.466  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.476  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.476  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.488  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.488  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.498  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.498  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.509  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.509  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.519  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.520  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.529  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.529  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.539  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.540  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.582  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.582  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.601  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.602  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.611  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.611  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.620  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.620  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.629  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.630  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.639  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.639  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.649  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.649  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.659  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.659  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.670  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.670  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.680  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.680  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.722  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.722  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.748  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.749  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.759  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.759  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.769  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.769  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.780  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.780  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.789  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.789  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.799  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.799  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.809  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.810  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.820  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.820  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.829  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 初始化sysModule-------
+2017-08-15 15:54:25.829  INFO 8680 --- [main] c.v.t.service.SysResourceServiceTest     : 插入及跟新 save-----------
+2017-08-15 15:54:25.863  INFO 8680 --- [Thread-5] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@482bce4f: startup date [Tue Aug 15 15:54:20 CST 2017]; root of context hierarchy
+2017-08-15 15:54:25.864  INFO 8680 --- [Thread-5] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2017-08-15 15:54:25.873  INFO 8680 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:55:29.678  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : Starting SysModeuleServiceTest on zhangmy16-szzbd with PID 22704 (started by v-guosq02 in D:\MyParcel\Tydirium)
+2017-08-15 15:55:29.679 DEBUG 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : Running with Spring Boot v1.5.4.RELEASE, Spring v4.3.9.RELEASE
+2017-08-15 15:55:29.679  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : No active profile set, falling back to default profiles: default
+2017-08-15 15:55:29.712  INFO 22704 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@366647c2: startup date [Tue Aug 15 15:55:29 CST 2017]; root of context hierarchy
+2017-08-15 15:55:30.371  INFO 22704 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 15:55:30.449  INFO 22704 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 15:55:30.478  INFO 22704 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysModuleRepository.
+2017-08-15 15:55:30.480  INFO 22704 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysResourceRepository.
+2017-08-15 15:55:30.481  INFO 22704 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysRoleRepository.
+2017-08-15 15:55:30.482  INFO 22704 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysUserRepository.
+2017-08-15 15:55:31.800  INFO 22704 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:55:33.254  INFO 22704 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-15 15:55:34.335  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@366647c2: startup date [Tue Aug 15 15:55:29 CST 2017]; root of context hierarchy
+2017-08-15 15:55:34.392  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/session],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.session(javax.servlet.http.HttpSession)
+2017-08-15 15:55:34.393  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/hello],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.hello(javax.servlet.http.HttpServletRequest)
+2017-08-15 15:55:34.395  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource/{resourceId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.396  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysResource,org.springframework.validation.BindingResult) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.396  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module/{moduleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.396  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysModule,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.396  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/modules],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.modules(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.396  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resources],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resources(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.397  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysUser,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.397  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user/{userId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.397  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/users],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.397  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysRole,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.398  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role/{roleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.398  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/roles],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.roles(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.398  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/checkRoleName],methods=[GET]}" onto public java.lang.Boolean com.vanke.tydirium.web.controller.sys.SysController.chenckRoleName(java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 15:55:34.401  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-15 15:55:34.401  INFO 22704 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-15 15:55:34.430  INFO 22704 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:55:34.430  INFO 22704 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:55:34.467  INFO 22704 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 15:55:34.734  INFO 22704 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2017-08-15 15:55:34.743  INFO 22704 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2017-08-15 15:55:34.753  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : Started SysModeuleServiceTest in 5.302 seconds (JVM running for 5.939)
+2017-08-15 15:55:34.788  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.914  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.929  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.941  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.954  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.964  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.975  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.987  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:34.998  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.009  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.342  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.360  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.370  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.381  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.392  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.406  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.418  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.429  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.440  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.451  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.479  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.500  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.511  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.522  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.534  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.544  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.556  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.566  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.578  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.590  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.652  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.674  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.685  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.697  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.708  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.720  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.731  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.742  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.753  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.763  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.835  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.852  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.862  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.872  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.882  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.891  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.900  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.911  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.922  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.931  INFO 22704 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 15:55:35.965  INFO 22704 --- [Thread-5] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@366647c2: startup date [Tue Aug 15 15:55:29 CST 2017]; root of context hierarchy
+2017-08-15 15:55:35.967  INFO 22704 --- [Thread-5] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2017-08-15 15:55:35.977  INFO 22704 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

@@ -1,6 +1,9 @@
 package com.vanke.tydirium.service;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -45,6 +48,7 @@ public class SysResourceServiceTest {
 			resource.setDescription("module"+i);
 			resource.setPriority(i);
 			resource.setUri("http://www.baidu.com");
+			logger.info("插入及跟新 save-----------");
 			sysResourceService.save(resource);
 		}
 		name = resource.getName();
@@ -67,6 +71,14 @@ public class SysResourceServiceTest {
 		Page<SysResource> pages = sysResourceService.findAll(pageable);
 		List<SysResource> list = pages.getContent();
 		Assert.assertEquals(10, list.size());
+	}
+	
+	@Test
+	public void testCollection(){
+		Set<Long> temp = new HashSet<>();
+		temp.add(id);
+		Set<SysResource> resource = sysResourceService.findByResourceIdIn(temp);
+		Assert.assertNotNull(resource);
 	}
 	
 	@Test
