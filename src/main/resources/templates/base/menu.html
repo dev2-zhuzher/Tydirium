@@ -1,23 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="menu">
-	<ul class="layui-nav layui-nav-tree" lay-filter="test">
-		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-		<li class="layui-nav-item layui-nav-itemed"><a
-			href="javascript:;">权限管理</a>
-			<dl class="layui-nav-child">
+	<!-- 侧边导航: user-role-module-resource -->
+	<ul class="layui-nav layui-nav-tree" lay-filter="test" th:each="role , roleStat : ${session.user.roles}">
+		<li class="layui-nav-item layui-nav-itemed" th:each="module , moduleStat : ${role.modules}">
+			 <a href="javascript:;"	th:text="${module.name }">模块名称</a>
+			<dl class="layui-nav-child"	th:each="resource ,resourceStat : ${module.resources}">
 				<dd>
-					<a href="/admin/sys/users"><i class="${module.icon }"></i>用户管理</a>
+					<a th:href="${resource.uri}" th:data-pattern="${resource.uri}" th:text="${resource.name}">资源名称</a>
 				</dd>
-				<dd>
-					<a href="javascript:;">角色管理</a>
-				</dd>
-				<dd>
-					<a href="">模块管理</a>
-				</dd>
-				<dd>
-					<a href="#">资源管理</a>
-				</dd>
-			</dl></li>
+			</dl>
+		</li>
 	</ul>
 </div>
 </html>
