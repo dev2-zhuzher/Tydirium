@@ -10,6 +10,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import com.vanke.tydirium.entity.sys.SysModule;
 import com.vanke.tydirium.repository.sys.SysModuleRepository;
@@ -43,7 +43,7 @@ public class SysModuleServiceImpl implements SysModuleService {
 			public Predicate toPredicate(Root<SysModule> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Predicate predicate = cb.conjunction();
 				List<Expression<Boolean>> expressions = predicate.getExpressions();
-				if (!StringUtils.isEmpty(moduleName)) {
+				if (StringUtils.isNotEmpty(moduleName)) {
 					predicate = cb.like(root.<String> get("name"), "%" + moduleName + "%");
 //					expressions.add(cb.like(root.<String> get("moduleName"), "%" + moduleName + "%"));
 				}
