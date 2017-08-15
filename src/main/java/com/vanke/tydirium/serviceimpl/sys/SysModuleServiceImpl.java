@@ -44,7 +44,8 @@ public class SysModuleServiceImpl implements SysModuleService {
 				Predicate predicate = cb.conjunction();
 				List<Expression<Boolean>> expressions = predicate.getExpressions();
 				if (!StringUtils.isEmpty(moduleName)) {
-					expressions.add(cb.like(root.<String> get("moduleName"), "%" + moduleName + "%"));
+					predicate = cb.like(root.<String> get("name"), "%" + moduleName + "%");
+//					expressions.add(cb.like(root.<String> get("moduleName"), "%" + moduleName + "%"));
 				}
 				return predicate;
 			}

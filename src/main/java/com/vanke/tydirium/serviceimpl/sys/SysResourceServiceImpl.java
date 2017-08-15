@@ -44,7 +44,8 @@ public class SysResourceServiceImpl implements SysResourceService {
 				Predicate predicate = cb.conjunction();
 				List<Expression<Boolean>> expressions = predicate.getExpressions();
 				if (!StringUtils.isEmpty(resourceName)) {
-					expressions.add(cb.like(root.<String>get("resourceName"), "%" + resourceName + "%"));
+					predicate = cb.like(root.<String>get("name"), "%" + resourceName + "%");
+//					expressions.add(cb.like(root.<String>get("resourceName"), "%" + resourceName + "%"));
 				}
 				return predicate;
 			}
