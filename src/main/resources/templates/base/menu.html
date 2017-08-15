@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu">
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+		<li class="layui-nav-item layui-nav-itemed"><a
+			href="javascript:;">权限管理</a>
+			<dl class="layui-nav-child">
+				<dd>
+					<a href="/admin/sys/users"><i class="${module.icon }"></i>用户管理</a>
+				</dd>
+				<dd>
+					<a href="javascript:;">角色管理</a>
+				</dd>
+				<dd>
+					<a href="">模块管理</a>
+				</dd>
+				<dd>
+					<a href="#">资源管理</a>
+				</dd>
+			</dl></li>
+	</ul>
+</div>
+</html>

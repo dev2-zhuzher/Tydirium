@@ -1,0 +1,60 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>后台管理系统</title>
+<!-- layui.css -->
+<link href="/plugin/layui/css/layui.css" rel="stylesheet" />
+<!-- 本页样式 -->
+<link href="/css/login.css" rel="stylesheet" />
+</head>
+<body>  
+		<div id="login" style="display:none;">
+			<form class="layui-form" action="">
+				<div class="layui-form-item" >
+					<fieldset class="layui-elem-field layui-field-title">
+                        <legend>后台登陆</legend>
+						<h1></h1>
+					</fieldset>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">账号</label>
+					<div class="layui-input-inline pm-login-input">
+						<input type="text" name="account" lay-verify="account"
+							placeholder="请输入账号" value="admin" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">密码</label>
+					<div class="layui-input-inline pm-login-input">
+						<input type="password" name="password" lay-verify="passWord"
+							placeholder="请输入密码" value="123456" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">人机验证</label>
+					<div class="layui-input-inline pm-login-input">
+						<input type="text" name="result_response" placeholder="人机验证"
+							value="" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item"
+					style="margin-top: 25px; margin-bottom: 0;">
+					<div class="layui-input-block">
+						<button class="layui-btn" style="width: 281px;" lay-submit=""
+							lay-filter="login">立即登录</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	<!-- layui.js -->
+	<script src="/plugin/layui/layui.js"></script>
+	<!-- layui规范化用法 -->
+	<script type="text/javascript">
+		layui.config({
+			base : '/js/'
+		}).use('login');
+	</script>
+</body>
+</html>
