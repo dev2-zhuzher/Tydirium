@@ -1,0 +1,89 @@
+2017-08-15 19:26:28.918  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : Starting SysModeuleServiceTest on zhangmy16-szzbd with PID 24756 (started by v-guosq02 in D:\MyParcel\Tydirium)
+2017-08-15 19:26:28.919 DEBUG 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : Running with Spring Boot v1.5.4.RELEASE, Spring v4.3.9.RELEASE
+2017-08-15 19:26:28.920  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : No active profile set, falling back to default profiles: default
+2017-08-15 19:26:28.957  INFO 24756 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1649b0e6: startup date [Tue Aug 15 19:26:28 CST 2017]; root of context hierarchy
+2017-08-15 19:26:29.673  INFO 24756 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 19:26:29.761  INFO 24756 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-08-15 19:26:29.797  INFO 24756 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysModuleRepository.
+2017-08-15 19:26:29.801  INFO 24756 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysResourceRepository.
+2017-08-15 19:26:29.801  INFO 24756 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysRoleRepository.
+2017-08-15 19:26:29.802  INFO 24756 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.vanke.tydirium.repository.sys.SysUserRepository.
+2017-08-15 19:26:31.223  INFO 24756 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-15 19:26:32.857  INFO 24756 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-15 19:26:33.835  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@1649b0e6: startup date [Tue Aug 15 19:26:28 CST 2017]; root of context hierarchy
+2017-08-15 19:26:33.902  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/session],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.session(javax.servlet.http.HttpSession)
+2017-08-15 19:26:33.904  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index/hello],methods=[GET]}" onto public com.vanke.tydirium.web.common.ResponseData com.vanke.tydirium.web.controller.IndexController.hello(javax.servlet.http.HttpServletRequest)
+2017-08-15 19:26:33.907  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module/{moduleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.907  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/module],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.module(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysModule,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.907  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource/{resourceId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resource],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resource(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysResource,org.springframework.validation.BindingResult) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysRole,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/role/{roleId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.role(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/checkRoleName],methods=[GET]}" onto public java.lang.Boolean com.vanke.tydirium.web.controller.sys.SysController.chenckRoleName(java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/resources],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.resources(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.908  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/modules],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.modules(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.909  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/users],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.909  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user/{userId}],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,java.lang.Long) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.909  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/user],methods=[POST]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.user(org.springframework.ui.Model,com.vanke.tydirium.entity.sys.SysUser,org.springframework.validation.BindingResult,java.lang.Long[]) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.909  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/sys/roles],methods=[GET]}" onto public java.lang.String com.vanke.tydirium.web.controller.sys.SysController.roles(org.springframework.ui.Model,java.lang.Integer,java.lang.Integer,java.lang.String) throws com.vanke.tydirium.exception.WebException
+2017-08-15 19:26:33.912  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-15 19:26:33.913  INFO 24756 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-15 19:26:33.943  INFO 24756 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 19:26:33.943  INFO 24756 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 19:26:33.980  INFO 24756 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-15 19:26:34.274  INFO 24756 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2017-08-15 19:26:34.283  INFO 24756 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2017-08-15 19:26:34.298  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : Started SysModeuleServiceTest in 5.687 seconds (JVM running for 6.597)
+2017-08-15 19:26:34.338  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.467  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.486  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.497  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.507  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.522  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.531  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.540  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.550  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.561  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.953  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.971  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.980  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:34.991  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.001  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.013  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.028  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.038  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.049  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.058  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.089  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.106  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.116  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.126  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.136  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.145  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.154  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.164  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.174  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.183  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.244  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.262  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.272  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.283  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.294  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.304  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.321  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.334  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.345  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.356  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.447  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.469  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.480  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.489  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.502  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.513  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.525  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.537  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.547  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.557  INFO 24756 --- [main] c.v.t.service.SysModeuleServiceTest      : 初始化sysModule-------
+2017-08-15 19:26:35.597  INFO 24756 --- [Thread-5] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1649b0e6: startup date [Tue Aug 15 19:26:28 CST 2017]; root of context hierarchy
+2017-08-15 19:26:35.601  INFO 24756 --- [Thread-5] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2017-08-15 19:26:35.608  INFO 24756 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
