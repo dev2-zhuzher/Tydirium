@@ -1,0 +1,214 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>index title</title>
+<link rel="stylesheet" href="/css/index.css" />
+<script src="/js/common/table/page.js"></script>
+<script src="/js/sys/user/add.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<blockquote class="layui-elem-quote">
+ <span class="layui-breadcrumb"> 
+		<a href="">首页</a> 
+		<a href="">权限管理</a>
+		<a href="">用户管理</a>
+	</span> 
+</blockquote>
+              
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>用户新增/修改</legend>
+</fieldset>
+ 
+<form class="layui-form layui-form-pane1" action="/admin/sys/user" method="post" id="addForm">
+  <div class="layui-form-item">
+  <div class="layui-inline">
+      <label class="layui-form-label">用户ID</label>
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">昵称 &nbsp;&nbsp;</label>
+      <div class="layui-input-inline">
+        <input type="text" name="nickName" lay-verify="" autocomplete="off" class="layui-input" value="yuzn">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">全名&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="fullName" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="yuzhouneng">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">登陆名&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="loginName" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="yuzhouneng">
+      </div>
+    </div>  
+    <div class="layui-inline">
+    <label class="layui-form-label">复选框</label>
+    <div class="layui-input-block">
+      <input type="checkbox" name="roleIds" title="测试角色" value="1" checked="">
+      <input type="checkbox" name="" title="角色1" >
+      <input type="checkbox" name="" title="角色2">
+    </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">邮箱地址&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="email" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="111@1.com">
+      </div>
+    </div> 
+    <div class="layui-inline">
+      <label class="layui-form-label">手机号码&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="mobile" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="12345678988">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">账号状态&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="deleted" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="0">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">账号密码&nbsp;&nbsp; </label>
+      <div class="layui-input-inline">
+        <input type="text" name="password" lay-verify="" placeholder="" autocomplete="off" class="layui-input" value="123456">
+      </div>
+    </div>
+     
+  </div>
+   <div class="layui-form-item">
+    <button class="layui-btn" lay-submit="" lay-filter="addForm">提交</button>
+  </div>
+  
+</form>
+   <!--  <form action="${pageScope.request.contextPath }/admin/sys/user" method="post" id="form" class="form-horizontal">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					<input type="hidden" name="id" value="${user.id }"/>
+					<div class="form-body">
+						<div class="alert alert-danger display-hide">
+							<button class="close" data-close="alert"></button>
+							抱歉，输入的内容有误！
+						</div>
+						<div class="alert alert-success display-hide">
+							<button class="close" data-close="alert"></button>
+							恭喜，内容已经全部完成了！
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> ID &nbsp;&nbsp;</label>
+							<div class="col-md-4">
+								<input type="text" name="id" data-required="1" class="form-control" disabled value="${user.id }"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> 用户类型 &nbsp;&nbsp;</label>
+							<div class="col-md-4">
+								<input type="text" name="id" data-required="1" class="form-control" disabled value="${user.userType == 1 ? '后台用户' : (user.userType == 2 ? '业主' : (user.userType == 4 ? '商户' : '未知')) }"/>
+							</div>
+						</div> 
+						<div class="form-group">
+							<label class="control-label col-md-3"> 全名 <span class="required"> * </span></label>
+							<div class="col-md-4">
+								<input type="text" name="fullname" data-required="1" class="form-control" value="${user.fullname }"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> 手机号  <span class="required"> * </span></label>
+							<div class="col-md-4">
+								<input type="text" name="mobile" class="form-control" value="${user.mobile }"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> 密码 &nbsp;&nbsp;</label>
+							<div class="col-md-4">
+								<input type="password" id="password_ipt" name="password" class="form-control" value="" placeholder="不修改请留空" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> 确认密码 &nbsp;&nbsp;</label>
+							<div class="col-md-4">
+								<input type="password" name="password1" class="form-control" value="" placeholder="不修改请留空" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3"> 账户状态 <span class="required"> * </span></label>
+							<div class="col-md-5">
+								<div class="icheck-inline" id="deleted">
+									<label><input type="radio" class="icheck type" name="deleted" value="0" <c:out value="${empty user.deleted ? 'checked' : (user.deleted == '0' ? 'checked' : '')}" /> /> 启用</label>
+									<label><input type="radio" class="icheck type" name="deleted" value="1" <c:out value="${user.deleted == 1 ? 'checked' : ''}" /> /> 停用</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label"> 关联角色  &nbsp;&nbsp;</label>
+							<div class="col-md-4">
+								<div class="checkbox-list">
+									<c:forEach var="role" items="${roles }">
+                                  		<c:set var="roleIdSame" value="false"/>
+                                  		<c:forEach var="_role" items="${user.roles }">
+                                  			<c:if test="${role.roleId == _role.roleId }">
+                                  				<c:set var="roleIdSame" value="true"/>
+                                  			</c:if>
+                                     	</c:forEach>
+	                                    <label class="checkbox-inline" data-error-container="#roleIds_error">
+	                                        <input type="checkbox" name="roleIds" id="${role.roleId }" <c:if test="${roleIdSame==true }">checked</c:if> value="${role.roleId }">${role.description }
+	                                    </label>
+                                   	</c:forEach>
+                                </div>
+                                <span class="help-block">(请选择至少一个角色)</span> 
+                                <div id="roleIds_error"></div>
+							</div>
+						</div> 
+						</div> 
+				</form>  -->      
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<!-- <script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form()
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+ 
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+  
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+  
+  
+});
+</script> -->
+
+</div>
+</body>
+</html>

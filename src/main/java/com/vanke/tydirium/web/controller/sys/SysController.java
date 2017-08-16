@@ -63,7 +63,7 @@ public class SysController extends BaseController {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysUser> pager = sysUserService.findAll(pageable);
 			model.addAttribute(PAGER, pager);
-			return "sysUsers";
+			return "sys/user/list";
 		} catch (Exception e) {
 			throw new WebException(e, "10001", "用户列表加载错误");
 		}
