@@ -17,4 +17,5 @@ public interface SysUserService {
 
 	void delete(Long userId);
 
+
 }

@@ -40,4 +40,5 @@ public class SysUserServiceImpl implements SysUserService {
 		sysUserRepository.delete(userId);
 	}
 
+
 }

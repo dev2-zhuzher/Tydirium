@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,13 @@ public class SysUser implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4720312215559366801L;
+
+
+
+	public static final String SESSION_TOKEN = "loginUser";
+	public static final Integer USER_TYPE_CUSTOMER = 2;
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,6 +83,10 @@ public class SysUser implements Serializable {
 
 	@Column(name = "deleted")
 	private Integer deleted = 0;
+	
+	@Column(name = "identity_id")
+	private String identityId;
+	
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -197,6 +209,22 @@ public class SysUser implements Serializable {
 
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	
+	public void setUpdateTime(Date updateTime){
+		this.updateTime = updateTime;
+	}
+
+	public String getIdentityId() {
+		return identityId;
+	}
+
+	public void setIdentityId(String identityId) {
+		this.identityId = identityId;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }
