@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.vanke.tydirium.entity.sys.SysModule;
 import com.vanke.tydirium.entity.sys.SysResource;
 
 public interface SysResourceService {
@@ -57,5 +58,12 @@ public interface SysResourceService {
 	 * @return
 	 */
 	SysResource findOne(Long resourceId);
+	/**
+	 * 查询当前模块下关联的资源
+	 * @param module
+	 * @param resources
+	 * @return
+	 */
+	List<SysResource> resourcesCheck(SysModule module, List<SysResource> resources);
 
 }
