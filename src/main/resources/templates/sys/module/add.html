@@ -1,0 +1,157 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>模块管理</title>  
+<script src="/js/sys/module/add.js"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<blockquote class="layui-elem-quote">
+			<span class="layui-breadcrumb"> 
+			<a href="">首页</a> 
+			<a href="">权限管理</a>
+			<a href="">模块管理</a>
+			</span>
+		</blockquote>
+
+		<fieldset class="layui-elem-field layui-field-title"
+			style="margin-top: 20px;">
+			<legend>模块新增/修改</legend>
+		</fieldset>
+
+		<form class="layui-form layui-form-pane" action="/admin/sys/module"
+			method="post" id="addForm">
+			<input type="hidden" name="id" lay-verify="" autocomplete="off"
+							class="layui-input" th:value="${module} == null ? '' : (${module.id} == null ? '' : ${module.id} )">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">模块名称<span class="required"
+						aria-required="true"> * </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="name" lay-verify="required" autocomplete="off"
+							class="layui-input" th:value="${module} == null ? '' : (${module.name} == null ? '' : ${module.name} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">显示级别<span class="required"
+						aria-required="true"> * </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="priority" lay-verify="required"
+							autocomplete="off" class="layui-input" th:value="${module} == null ? '' : (${module.priority} == null ? '' : ${module.priority} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">模块描述</label>
+					<div class="layui-input-block">
+						<input type="text" name="description" lay-verify=""
+							autocomplete="off" class="layui-input" th:value="${module} == null ? '' : (${module.description} == null ? '' : ${module.description} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">显示图标<span class="required"
+						aria-required="true"> * </span></label>
+					<div class="layui-input-block" lay-verify="moduleIcon">
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe650;' )">
+							<input type="radio" name="icon" value="xe650;" title="<span class='layui-icon myicon' >&#xe650;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe650;' )">
+							<input type="radio" name="icon" value="xe650;" title="<span class='layui-icon myicon' >&#xe650;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe620;' )">
+							<input type="radio" name="icon" value="xe620;" title="<span class='layui-icon myicon' >&#xe620;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe620;' )">
+							<input type="radio" name="icon" value="xe620;" title="<span class='layui-icon myicon' >&#xe620;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe609;' )">
+							<input type="radio" name="icon" value="xe609;" title="<span class='layui-icon myicon' >&#xe609;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe609;' )">
+							<input type="radio" name="icon" value="xe609;" title="<span class='layui-icon myicon' >&#xe609;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe614;' )">
+							<input type="radio" name="icon" value="xe614;" title="<span class='layui-icon myicon' >&#xe614;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe614;' )">
+							<input type="radio" name="icon" value="xe614;" title="<span class='layui-icon myicon' >&#xe614;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe600;' )">
+							<input type="radio" name="icon" value="xe600;" title="<span class='layui-icon myicon' >&#xe600;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe600;' )">
+							<input type="radio" name="icon" value="xe600;" title="<span class='layui-icon myicon' >&#xe600;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe60f;' )">
+							<input type="radio" name="icon" value="xe60f;" title="<span class='layui-icon myicon' >&#xe60f;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe60f;' )">
+							<input type="radio" name="icon" value="xe60f;" title="<span class='layui-icon myicon' >&#xe60f;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe62e;' )">
+							<input type="radio" name="icon" value="xe62e;" title="<span class='layui-icon myicon' >&#xe62e;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe62e;' )">
+							<input type="radio" name="icon" value="xe62e;" title="<span class='layui-icon myicon' >&#xe62e;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe628;' )">
+							<input type="radio" name="icon" value="xe628;" title="<span class='layui-icon myicon' >&#xe628;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe628;' )">
+							<input type="radio" name="icon" value="xe628;" title="<span class='layui-icon myicon' >&#xe628;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe62c;' )">
+							<input type="radio" name="icon" value="xe62c;" title="<span class='layui-icon myicon' >&#xe62c;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe62c;' )">
+							<input type="radio" name="icon" value="xe62c;" title="<span class='layui-icon myicon' >&#xe62c;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe636;' )">
+							<input type="radio" name="icon" value="xe636;" title="<span class='layui-icon myicon' >&#xe636;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe636;' )">
+							<input type="radio" name="icon" value="xe636;" title="<span class='layui-icon myicon' >&#xe636;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe621;' )">
+							<input type="radio" name="icon" value="xe621;" title="<span class='layui-icon myicon' >&#xe621;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe621;' )">
+							<input type="radio" name="icon" value="xe621;" title="<span class='layui-icon myicon' >&#xe621;</span> "  >
+						</span>
+						<span th:if="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe622;' )">
+							<input type="radio" name="icon" value="xe622;" title="<span class='layui-icon myicon' >&#xe622;</span> " checked >
+						</span>
+						<span th:unless="${module} == null ? false : (${module.icon} == null ? false : ${module.icon} =='xe622;' )">
+							<input type="radio" name="icon" value="xe622;" title="<span class='layui-icon myicon' >&#xe622;</span> "  >
+						</span> 
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">关联资源<span class="required"
+						aria-required="true"> * </span></label>
+					<div class="layui-input-block" lay-verify="checkResource" > 
+						<span th:each="resource : ${resources}"> 
+							<input type="checkbox" name="resourceIds" th:if="${#bools.isTrue(resource.isCheck)}"  th:title="${resource.name}" th:value="${resource.id}" checked>
+							<input type="checkbox" name="resourceIds" th:if="${#bools.isFalse(resource.isCheck)}"  th:title="${resource.name}" th:value="${resource.id}" >
+						</span>
+						 <!-- <input type="checkbox" name="resourceIds" th:each="resource : ${resources}"  th:title="${resource.name}" th:value="${resource.id}" > -->
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<input type="submit" class="layui-btn" lay-submit="" />
+				<!-- <button class="layui-btn" lay-submit="" lay-filter="moduleAddOrEditForm">提交</button> -->
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>
