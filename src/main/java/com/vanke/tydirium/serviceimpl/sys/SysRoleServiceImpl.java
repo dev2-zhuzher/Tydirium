@@ -1,6 +1,7 @@
 package com.vanke.tydirium.serviceimpl.sys;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vanke.tydirium.entity.sys.SysRole;
+import com.vanke.tydirium.entity.sys.SysUser;
 import com.vanke.tydirium.repository.sys.SysRoleRepository;
 import com.vanke.tydirium.service.sys.SysRoleService;
 
@@ -53,7 +56,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public List<SysRole> findAll() {
-		return sysRoleRepository.findAll(new Sort(Direction.DESC, "roleId"));
+		return sysRoleRepository.findAll(new Sort(Direction.DESC, "id"));
 	}
 
 	@Override
@@ -81,5 +84,29 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Override
 	public void delete(Long roleId) {
 		sysRoleRepository.delete(roleId);
+	}
+
+	@Override
+	public List<SysRole> rolesCheck(SysUser user, List<SysRole> roles) {
+		if(user == null || CollectionUtils.isEmpty(user.getRoles())){
+			return roles;
+		}
+		Iterator<SysRole> rolesIterator = roles.iterator();
+		SysRole roleThis = null;
+		SysRole userRoleThis = null;
+		// 所有的role
+		while (rolesIterator.hasNext()) {
+			roleThis = rolesIterator.next();
+			Iterator<SysRole> userRoles = user.getRoles().iterator();
+			// 当前用户拥有的role
+			while (userRoles.hasNext()) {
+				userRoleThis = userRoles.next();
+				if(Long.compare(roleThis.getId(), userRoleThis.getId()) == 0){
+					roleThis.setIsCheck(true);
+					break;
+				}
+			}
+		}
+		return roles;
 	}
 }

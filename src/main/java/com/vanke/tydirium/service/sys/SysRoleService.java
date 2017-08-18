@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.vanke.tydirium.entity.sys.SysRole;
+import com.vanke.tydirium.entity.sys.SysUser;
 
 public interface SysRoleService {
 
@@ -73,5 +74,12 @@ public interface SysRoleService {
 	 * @return
 	 */
 	void delete(Long roleId);
+	/***
+	 * 查找当前用户拥有的角色
+	 * @param user
+	 * @param roles
+	 * @return
+	 */
+	List<SysRole> rolesCheck(SysUser user, List<SysRole> roles);
 
 }
