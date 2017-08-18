@@ -2,8 +2,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="base/layout">
 <head>
-<title>index title</title>
-<link rel="stylesheet" href="/css/index.css" />
+<title>用户管理</title>
 <script src="/js/common/table/page.js"></script>
 <script src="/js/sys/user/list.js"></script>
 </head>
@@ -21,16 +20,22 @@
 		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
 		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
 		  <div class="layui-inline">
-		    <label class="layui-form-label">用户姓名</label>
+		    <label class="layui-form-label">用户昵称</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="fullName" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+		      <input type="text" name="queryNickName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" th:value="${queryNickName} == null ? '' : ${queryNickName} ">
 		    </div>
 		  </div>
 		  <div class="layui-inline">
-		    <input class="layui-btn layui-btn-normal" lay-submit="" type="submit" value="查询"></input>
+		    <label class="layui-form-label">手机号码</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="queryMobile" lay-verify="" autocomplete="off" placeholder="" class="layui-input" th:value="${queryMobile} == null ? '' : ${queryMobile} ">
+		    </div>
 		  </div>
 		  <div class="layui-inline">
-		    <a href="/userAdd" class="layui-btn layui-btn-normal"><i class="layui-icon"></i></a>
+		    <input class="layui-btn" lay-submit="" type="submit" value="查询"></input>
+		  </div>
+		  <div class="layui-inline">
+		    <a href="/admin/sys/user/0" class="layui-btn"><i class="layui-icon"></i></a>
 		  </div>
   	</form>
   </div>
@@ -62,8 +67,8 @@
                 	<td th:text="${user.deleted == 1 ? '停用' : '正常'}">停用 </td>
                 	<td>
 						<a th:href="@{/admin/sys/user/{userId}(userId = ${user.id})}" > 
-							<button class="layui-btn layui-btn-small layui-btn-normal layui-btn-radius">
-								<i class="layui-icon"></i>编辑
+							<button class="layui-btn layui-btn-small layui-btn-radius">
+								<i class="layui-icon">&#xe642;</i>编辑
 							</button>
     					</a>
 					</td>
