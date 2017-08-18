@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>角色管理</title> 
+<script src="/js/common/table/page.js"></script>
+<script src="/js/sys/user/list.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<blockquote class="layui-elem-quote">
+  <span class="layui-breadcrumb"> 
+		<a href="">首页</a> 
+		<a href="">权限管理</a>
+		<a href="">角色管理</a>
+	</span> 
+</blockquote>
+  <div>
+	<form class="layui-form" id="from" action="/admin/sys/roles">
+		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
+		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
+		  <div class="layui-inline">
+		    <label class="layui-form-label">角色名称</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="queryRoleName" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" th:value="${queryRoleName} == null ? '' : ${queryRoleName} ">
+		    </div>
+		  </div>
+		  <div class="layui-inline">
+		    <input class="layui-btn" lay-submit="" type="submit" value="查询"></input>
+		  </div>
+		  <div class="layui-inline">
+		    <a href="/admin/sys/role/0" class="layui-btn"><i class="layui-icon"></i></a>
+		  </div>
+  	</form>
+  </div>
+ 
+	<table class="layui-table">
+		<colgroup>
+			<col width="150">
+			<col width="200">
+			<col>
+		</colgroup>
+		<thead>
+			<tr>
+				<th>角色ID</th>
+				<th>角色名称</th>
+				<th>角色描述</th> 
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			  <tr th:each="role,roleStat:${pager.content}">
+                	<td th:text="${role.id}">角色ID</td>
+                	<td th:text="${role.name}">角色名称</td>
+                	<td th:text="${role.description}">角色描述</td>
+                	<td>
+						<a th:href="@{/admin/sys/role/{roleId}(roleId = ${role.id})}" > 
+							<button class="layui-btn layui-btn-small layui-btn-radius">
+								<i class="layui-icon">&#xe642;</i>编辑
+							</button>
+    					</a>
+					</td>
+              </tr>
+		</tbody>
+	</table>
+	<div id="laypage"></div>
+	<input type="hidden" id="pagerTotalPages" th:value ="${pager.totalPages}"/>
+	<input type="hidden" id="pagerNumber" th:value="${pager.number + 1}"/>
+</div>
+</body>
+</html>
