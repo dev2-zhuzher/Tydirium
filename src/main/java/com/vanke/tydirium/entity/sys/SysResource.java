@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -39,6 +40,16 @@ public class SysResource implements Serializable {
 	@NotNull(message = "显示级别不能为空")
 	@Column(name = "priority", nullable = false)
 	private Integer priority = 0;// 优先级
+	@Transient
+	private boolean isCheck = false; // 是否被当前模块选中 
+
+	public boolean getIsCheck() {
+		return isCheck;
+	}
+
+	public void setIsCheck(boolean isCheck) {
+		this.isCheck = isCheck;
+	}
 
 	public Long getId() {
 		return id;

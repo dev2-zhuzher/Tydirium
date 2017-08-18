@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -44,7 +45,17 @@ public class SysRole implements Serializable {
 	@JoinTable(name = "relation_role_module", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "module_id"))
 	@OrderBy("priority desc") // 根据创建时间进行排序
 	private Set<SysModule> modules = new LinkedHashSet<SysModule>();// 角色关联的权限
+	@Transient
+	private boolean isCheck = false; // 是否被当前用户选中 
 
+	public boolean getIsCheck() {
+		return isCheck;
+	}
+
+	public void setIsCheck(boolean isCheck) {
+		this.isCheck = isCheck;
+	}
+	
 	public Long getId() {
 		return id;
 	}
