@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>模块管理</title> 
+<script src="/js/common/table/page.js"></script>
+<script src="/js/sys/module/list.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<blockquote class="layui-elem-quote">
+  <span class="layui-breadcrumb"> 
+		<a href="">首页</a> 
+		<a href="">权限管理</a>
+		<a href="">模块管理</a>
+	</span> 
+</blockquote>
+  <div>
+	<form class="layui-form" id="from" action="/admin/sys/modules">
+		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
+		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
+		  <div class="layui-inline">
+		    <label class="layui-form-label">模块名称</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="queryModuleName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" th:value="${queryModuleName} == null ? '' : ${queryModuleName} ">
+		    </div>
+		  </div>
+		  <div class="layui-inline"> 
+		  	<input class="layui-btn" lay-submit="" type="submit" value="查询"></input>
+		  </div>
+		  <div class="layui-inline">
+		    <a href="/admin/sys/module/0" class="layui-btn"><i class="layui-icon"></i></a>
+		  </div>
+  	</form>
+  </div>
+ 
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>模块ID</th>
+				<th>名称</th>
+				<th>图标</th> 
+				<th>级别</th>
+				<th>描述</th>  
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			  <tr th:each="module,moduleStat:${pager.content}">
+                	<td th:text="${module.id}">ID</td>
+                	<td th:text="${module.name}">名称</td>
+                	<td th:utext="|<i class='layui-icon myicon'>${module.icon==null?'':'&#'}${module.icon==null?'':module.icon}</i>|">图标</td>
+                	<td th:text="${module.priority}">级别</td>
+                	<td th:text="${module.description}">描述</td>
+                	<td>
+						<a th:href="@{/admin/sys/module/{moduleId}(moduleId = ${module.id})}" > 
+							<button class="layui-btn layui-btn-small layui-btn-radius">
+								<i class="layui-icon">&#xe642;</i>编辑
+							</button>
+    					</a>
+					</td>
+              </tr>
+		</tbody>
+	</table>
+	<div id="laypage"></div>
+	<input type="hidden" id="pagerTotalPages" th:value ="${pager.totalPages}"/>
+	<input type="hidden" id="pagerNumber" th:value="${pager.number + 1}"/>
+</div>
+</body>
+</html>
