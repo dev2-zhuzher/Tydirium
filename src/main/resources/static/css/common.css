@@ -1,3 +1,14 @@
-﻿.site-demo-button div .layui-btn,.layui-inline,.layui-input-inline {
-    margin: 10px;
+﻿.site-demo-button div .layui-btn, .layui-inline, .layui-input-inline {
+	margin: 10px;
+}
+/* 必填选项红星 */
+.layui-form-label .required {
+	color: #e02222;
+	font-size: 12px;
+	padding-left: 2px;
+}
+/* 自定义图标 */
+.myicon {
+	font-size: 30px !important;
+	color: #009688;
 }
