@@ -44,7 +44,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 				Predicate predicate = cb.conjunction();
 				List<Expression<Boolean>> expressions = predicate.getExpressions();
 				if (StringUtils.isNotEmpty(name)) {
-					expressions.add(cb.like(root.<String>get("name"), "%" + name + "%"));
+					predicate = cb.like(root.<String> get("name"), "%" + name + "%");
+//					expressions.add(cb.like(root.<String>get("name"), "%" + name + "%"));
 				}
 				return predicate;
 			}

@@ -116,7 +116,7 @@ public class SysController extends BaseController {
 			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size,
 			@RequestParam(value = "queryRoleName", required = false) String queryRoleName) throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "roleId"));
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysRole> pager = sysRoleService.findAll(pageable);
 			model.addAttribute(QUERYROLENAME, queryRoleName);
 			model.addAttribute("pager", pager);
@@ -163,7 +163,7 @@ public class SysController extends BaseController {
 			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size,
 			@RequestParam(value = "queryModuleName", required = false) String queryModuleName) throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "moduleId"));
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysModule> pager = sysModuleService.findAll(queryModuleName, pageable);
 			model.addAttribute("queryModuleName", queryModuleName);
 			model.addAttribute("pager", pager);
@@ -220,7 +220,7 @@ public class SysController extends BaseController {
 			@RequestParam(value = "queryResourcesName", required = false) String queryResourcesName)
 			throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "resourceId"));
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysResource> pager = sysResourceService.findAll(queryResourcesName, pageable);
 			model.addAttribute("queryResourcesName", queryResourcesName);
 			model.addAttribute("pager", pager);
