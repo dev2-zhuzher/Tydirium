@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.vanke.tydirium.entity.sys.SysModule;
+import com.vanke.tydirium.entity.sys.SysRole;
 
 public interface SysModuleService {
 
@@ -58,4 +59,11 @@ public interface SysModuleService {
 	 * @return
 	 */
 	SysModule findOne(Long moduleId);
+	/**
+	 * 查找当前的角色下存在的关联模块
+	 * @param role
+	 * @param modules
+	 * @return
+	 */
+	List<SysModule> modulesCheck(SysRole role, List<SysModule> modules);
 }
