@@ -59,7 +59,7 @@ layui.define(['element', 'layer', 'form'], function (exports) {
             id: 'layer-login',
             type: 1,
             title: false,
-            shade: 0.4,
+            shade: [1,'#23262E'],
             //shadeClose: true,
             area: ['500px', '360px'],
             closeBtn: 0,
