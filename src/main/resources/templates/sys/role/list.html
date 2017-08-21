@@ -2,7 +2,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorator="base/layout">
 <head>
-<title>用户管理</title>
+<title>角色管理</title> 
 <script src="/js/common/table/page.js"></script>
 <script src="/js/sys/user/list.js"></script>
 </head>
@@ -12,30 +12,24 @@
   <span class="layui-breadcrumb"> 
 		<a href="">首页</a> 
 		<a href="">权限管理</a>
-		<a href="">用户管理</a>
+		<a href="">角色管理</a>
 	</span> 
 </blockquote>
   <div>
-	<form class="layui-form" id="from" action="/admin/sys/users">
+	<form class="layui-form" id="from" action="/admin/sys/roles">
 		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
 		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
 		  <div class="layui-inline">
-		    <label class="layui-form-label">用户昵称</label>
+		    <label class="layui-form-label">角色名称</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="queryNickName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" th:value="${queryNickName} == null ? '' : ${queryNickName} ">
-		    </div>
-		  </div>
-		  <div class="layui-inline">
-		    <label class="layui-form-label">手机号码</label>
-		    <div class="layui-input-block">
-		      <input type="text" name="queryMobile" lay-verify="" autocomplete="off" placeholder="" class="layui-input" th:value="${queryMobile} == null ? '' : ${queryMobile} ">
+		      <input type="text" name="queryRoleName" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" th:value="${queryRoleName} == null ? '' : ${queryRoleName} ">
 		    </div>
 		  </div>
 		  <div class="layui-inline">
 		    <input class="layui-btn" lay-submit="" type="submit" value="查询"></input>
 		  </div>
 		  <div class="layui-inline">
-		    <a href="/admin/sys/user/0" class="layui-btn"><i class="layui-icon"></i></a>
+		    <a href="/admin/sys/role/0" class="layui-btn"><i class="layui-icon"></i></a>
 		  </div>
   	</form>
   </div>
@@ -48,25 +42,19 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>用户ID</th>
-				<th>用户姓名</th>
-				<th>用户昵称</th>
-				<th>手机号码</th>
-				<th>创建时间</th> 
-				<th>当前状态</th>
+				<th>角色ID</th>
+				<th>角色名称</th>
+				<th>角色描述</th> 
 				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			  <tr th:each="user,userStat:${pager.content}">
-                	<td th:text="${user.id}">description</td>
-                	<td th:text="${user.fullName}">yyy</td>
-                	<td th:text="${user.nickName}">yy</td>
-                	<td th:text="${user.mobile}">17688968888</td>
-                	<td th:text="${user.createTime}">2017-07-15</td> 
-                	<td th:text="${user.deleted == 1 ? '停用' : '正常'}">停用 </td>
+			  <tr th:each="role,roleStat:${pager.content}">
+                	<td th:text="${role.id}">角色ID</td>
+                	<td th:text="${role.name}">角色名称</td>
+                	<td th:text="${role.description}">角色描述</td>
                 	<td>
-						<a th:href="@{/admin/sys/user/{userId}(userId = ${user.id})}" > 
+						<a th:href="@{/admin/sys/role/{roleId}(roleId = ${role.id})}" > 
 							<button class="layui-btn layui-btn-small layui-btn-radius">
 								<i class="layui-icon">&#xe642;</i>编辑
 							</button>

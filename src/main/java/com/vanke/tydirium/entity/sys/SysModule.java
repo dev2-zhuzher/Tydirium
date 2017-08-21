@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -52,7 +53,17 @@ public class SysModule implements Serializable {
 	@JoinTable(name = "relation_module_resource", joinColumns = @JoinColumn(name = "module_id"), inverseJoinColumns = @JoinColumn(name = "resource_id"))
 	@OrderBy("priority desc")
 	private Set<SysResource> resources = new LinkedHashSet<SysResource>();// 模块关联的资源
+	@Transient
+	private boolean isCheck = false; // 是否被当前角色选中 
 
+	public boolean getIsCheck() {
+		return isCheck;
+	}
+
+	public void setIsCheck(boolean isCheck) {
+		this.isCheck = isCheck;
+	}
+	
 	public Long getId() {
 		return id;
 	}

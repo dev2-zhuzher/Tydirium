@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +38,11 @@ import com.vanke.tydirium.web.controller.BaseController;
 public class SysController extends BaseController {
 
 	public static final String PAGER = "pager";
+	/** 当前页数 */
+	public static final String PAGE = "page";
+	/** 当前页条数 */
+	public static final String SIZE = "size";
+	public static final String QUERYNICKNAME = "queryNickName";
 	public static final String QUERYMOBILE = "queryMobile";
 	public static final String ROLES = "roles";
 	public static final String USER = "user";
@@ -45,7 +51,11 @@ public class SysController extends BaseController {
 	public static final String ROLE = "role";
 	public static final String RESOURCES = "resources";
 	public static final String MODULE = "module";
+	public static final String QUERYMODULENAME = "queryModuleName";
 	public static final String RESOURCE = "resource";
+	public static final String QUERYRESOURCESNAME = "queryResourcesName";
+	public static final String MODULEIDS = "moduleIds";
+	public static final String RESOURCEIDS = "resourceIds";
 
 	@Autowired
 	private SysUserService sysUserService;
@@ -57,12 +67,16 @@ public class SysController extends BaseController {
 	private SysResourceService sysResourceService;
 
 	@RequestMapping(value = "/users", method = { RequestMethod.GET })
-	public String user(Model model, @RequestParam(value = "page", defaultValue = DEFAULT_PAGE) Integer page,
-			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size) throws WebException {
+	public String user(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
+			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+			@RequestParam(value = QUERYNICKNAME, required = false) String queryNickName,
+			@RequestParam(value = QUERYMOBILE, required = false) String queryMobile) throws WebException {
 		try {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
-			Page<SysUser> pager = sysUserService.findAll(pageable);
+			Page<SysUser> pager = sysUserService.findAll(queryNickName, queryMobile, pageable);
 			model.addAttribute(PAGER, pager);
+			model.addAttribute(QUERYNICKNAME, queryNickName);
+			model.addAttribute(QUERYMOBILE, queryMobile);
 			return "sys/user/list";
 		} catch (Exception e) {
 			throw new WebException(e, "10001", "用户列表加载错误");
@@ -74,9 +88,10 @@ public class SysController extends BaseController {
 		try {
 			List<SysRole> roles = sysRoleService.findAll();
 			SysUser user = sysUserService.findOne(userId);
+			roles = sysRoleService.rolesCheck(user, roles);
 			model.addAttribute(ROLES, roles);
 			model.addAttribute(USER, user);
-			return "sysUser";
+			return "/sys/user/add";
 		} catch (Exception e) {
 			throw new WebException(e, "", "用户详情错误");
 		}
@@ -99,12 +114,20 @@ public class SysController extends BaseController {
 			if (sysUser == null) {
 				sysUser = new SysUser();
 			}
+			sysUser.setId(user.getId());
 			sysUser.setNickName(user.getNickName());
+			sysUser.setLoginName(user.getLoginName());
 			sysUser.setFullName(user.getFullName());
 			sysUser.setPassword(user.getPassword());
 			sysUser.setMobile(user.getMobile());
+			sysUser.setSex(user.getSex().getIndex());
 			sysUser.setRoles(roles);
 			sysUser.setDeleted(user.getDeleted());
+			sysUser.setEmail(user.getEmail());
+			if(StringUtils.isNotEmpty(user.getPassword())){
+				sysUser.setPassword(user.getPassword());
+			}
+			sysUserService.save(sysUser);
 			return super.REDIRECT + "/admin/sys/users";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
@@ -112,15 +135,15 @@ public class SysController extends BaseController {
 	}
 
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
-	public String roles(Model model, @RequestParam(value = "page", defaultValue = DEFAULT_PAGE) Integer page,
-			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-			@RequestParam(value = "queryRoleName", required = false) String queryRoleName) throws WebException {
+	public String roles(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
+			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+			@RequestParam(value = QUERYROLENAME, required = false) String queryRoleName) throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "roleId"));
-			Page<SysRole> pager = sysRoleService.findAll(pageable);
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+			Page<SysRole> pager = sysRoleService.findAll(queryRoleName, pageable);
 			model.addAttribute(QUERYROLENAME, queryRoleName);
-			model.addAttribute("pager", pager);
-			return "sysRoles";
+			model.addAttribute(PAGER, pager);
+			return "/sys/role/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -131,9 +154,10 @@ public class SysController extends BaseController {
 		try {
 			List<SysModule> modules = sysModuleService.findAll();
 			SysRole role = sysRoleService.findOne(roleId);
+			modules = sysModuleService.modulesCheck(role, modules);
 			model.addAttribute(MODULES, modules);
 			model.addAttribute(ROLE, role);
-			return "sysRole";
+			return "/sys/role/add";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -141,7 +165,7 @@ public class SysController extends BaseController {
 
 	@RequestMapping(value = "/role", method = { RequestMethod.POST })
 	public String role(Model model, @Valid SysRole role, BindingResult bindingResults,
-			@RequestParam("moduleIds") Long[] moduleIds) throws WebException {
+			@RequestParam(MODULEIDS) Long[] moduleIds) throws WebException {
 		try {
 			long roleId = role.getId() == null ? 0 : role.getId();
 			if (bindingResults.hasErrors()) {
@@ -149,25 +173,24 @@ public class SysController extends BaseController {
 				return super.REDIRECT + "/admin/sys/role/" + roleId;
 			}
 			Set<SysModule> modules = sysModuleService.findByModuleIdIn(Arrays.<Long>asList(moduleIds));
-			role.setDescription(role.getDescription());
 			role.setModules(modules);
 			role = sysRoleService.save(role);
-			return "sysRole";
+			return super.REDIRECT + "/admin/sys/roles";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
 	}
 
 	@RequestMapping(value = "/modules", method = RequestMethod.GET)
-	public String modules(Model model, @RequestParam(value = "page", defaultValue = DEFAULT_PAGE) Integer page,
-			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-			@RequestParam(value = "queryModuleName", required = false) String queryModuleName) throws WebException {
+	public String modules(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
+			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+			@RequestParam(value = QUERYMODULENAME, required = false) String queryModuleName) throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "moduleId"));
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysModule> pager = sysModuleService.findAll(queryModuleName, pageable);
-			model.addAttribute("queryModuleName", queryModuleName);
-			model.addAttribute("pager", pager);
-			return "sysModules";
+			model.addAttribute(QUERYMODULENAME, queryModuleName);
+			model.addAttribute(PAGER, pager);
+			return "/sys/module/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -178,9 +201,10 @@ public class SysController extends BaseController {
 		try {
 			SysModule module = sysModuleService.findOne(moduleId);
 			List<SysResource> resources = sysResourceService.findAll();
+			resources = sysResourceService.resourcesCheck(module, resources);
 			model.addAttribute(RESOURCES, resources);
 			model.addAttribute(MODULE, module);
-			return "sysModule";
+			return "/sys/module/add";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -188,7 +212,7 @@ public class SysController extends BaseController {
 
 	@RequestMapping(value = "/module", method = { RequestMethod.POST })
 	public String module(Model model, @Valid SysModule module, BindingResult bindingResults,
-			@RequestParam("resourceIds") Long[] resourceIds) throws WebException {
+			@RequestParam(RESOURCEIDS) Long[] resourceIds) throws WebException {
 		try {
 			long moduleId = module.getId() == null ? 0 : module.getId();
 			if (bindingResults.hasErrors()) {
@@ -198,7 +222,7 @@ public class SysController extends BaseController {
 			Set<SysResource> resources = sysResourceService.findByResourceIdIn(Arrays.<Long>asList(resourceIds));
 			module.setResources(resources);
 			module = sysModuleService.save(module);
-			return "sysModules";
+			return super.REDIRECT + "/admin/sys/modules";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -215,16 +239,15 @@ public class SysController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/resources", method = RequestMethod.GET)
-	public String resources(Model model, @RequestParam(value = "page", defaultValue = DEFAULT_PAGE) Integer page,
-			@RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-			@RequestParam(value = "queryResourcesName", required = false) String queryResourcesName)
-			throws WebException {
+	public String resources(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
+			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+			@RequestParam(value = QUERYRESOURCESNAME, required = false) String queryResourcesName) throws WebException {
 		try {
-			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "resourceId"));
+			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysResource> pager = sysResourceService.findAll(queryResourcesName, pageable);
-			model.addAttribute("queryResourcesName", queryResourcesName);
-			model.addAttribute("pager", pager);
-			return "sysResources";
+			model.addAttribute(QUERYRESOURCESNAME, queryResourcesName);
+			model.addAttribute(PAGER, pager);
+			return "/sys/resource/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -242,7 +265,7 @@ public class SysController extends BaseController {
 		try {
 			SysResource resource = sysResourceService.findOne(resourceId);
 			model.addAttribute(RESOURCE, resource);
-			return "sysResource";
+			return "sys/resource/add";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}
@@ -266,7 +289,7 @@ public class SysController extends BaseController {
 			} else {
 				resource = sysResourceService.save(resource);
 			}
-			return "sysResource";
+			return super.REDIRECT + "/admin/sys/resources";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
 		}

@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>角色管理</title>  
+<script src="/js/sys/role/add.js"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<blockquote class="layui-elem-quote">
+			<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">权限管理</a>
+				<a href="">角色管理</a>
+			</span>
+		</blockquote>
+
+		<fieldset class="layui-elem-field layui-field-title"
+			style="margin-top: 20px;">
+			<legend>角色新增/修改</legend>
+		</fieldset>
+
+		<form class="layui-form layui-form-pane" action="/admin/sys/role"
+			method="post" id="addForm">
+			<input type="hidden" name="id" lay-verify=""
+							autocomplete="off" class="layui-input"
+							th:value="${role} == null ? '' : (${role.id} == null ? '' : ${role.id} )">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">角色名称<span class="required"
+						> * </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="name" lay-verify="required" autocomplete="off"
+							class="layui-input" th:value="${role} == null ? '' : (${role.name} == null ? '' : ${role.name} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">角色描述</label>
+					<div class="layui-input-block">
+						<input type="text" name="description" lay-verify=""
+							autocomplete="off" class="layui-input" th:value="${role} == null ? '' : (${role.description} == null ? '' : ${role.description} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item"> 
+				<div class="layui-inline">
+					<label class="layui-form-label">关联模块<span class="required"
+						 > * </span></label>
+					<!-- 所有modules -->
+					<div class="layui-input-block" lay-verify="checkModule">
+						<span th:each="module : ${modules}"> 
+							<input type="checkbox" name="moduleIds" th:if="${#bools.isTrue(module.isCheck)}"  th:title="${module.name}" th:value="${module.id}" checked>
+							<input type="checkbox" name="moduleIds" th:if="${#bools.isFalse(module.isCheck)}"  th:title="${module.name}" th:value="${module.id}" >
+						</span>
+				 	</div>
+				 </div>
+			</div>
+			<div class="layui-form-item">
+				<button class="layui-btn" lay-submit="" lay-filter="addForm">提交</button>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

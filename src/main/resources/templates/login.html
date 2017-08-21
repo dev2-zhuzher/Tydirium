@@ -42,9 +42,11 @@
 				<div class="layui-form-item"
 					style="margin-top: 25px; margin-bottom: 0;">
 					<div class="layui-input-block">
-						<button class="layui-btn" style="width: 281px;" lay-submit=""
+						<button class="layui-btn" style="width: 133px;" lay-submit=""
 							lay-filter="login">立即登录</button>
+						<a class="layui-btn" style="width: 133px;" th:href="|${zhuzherApiHost}?zhuzher_api_host=${zhuzherApiHost}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${redirectUri}&response_type=${responseType}&scopes=${scopes}&state=${state}|">使用住这儿账号</a>
 					</div>
+					
 				</div>
 			</form>
 		</div>

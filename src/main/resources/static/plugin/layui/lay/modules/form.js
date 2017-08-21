@@ -331,12 +331,12 @@ layui.define('layer', function(exports){
               var next = $(this).next('.'+CLASS);
               this.checked = false;
               next.removeClass(CLASS+'ed');
-              next.find('.layui-icon').removeClass(ANIM).html(ICON[1]);
+              $(next.find('.layui-icon')[0]).removeClass(ANIM).html(ICON[1]);
             });
             
             radio[0].checked = true;
             reElem.addClass(CLASS+'ed');
-            reElem.find('.layui-icon').addClass(ANIM).html(ICON[0]);
+            $(reElem.find('.layui-icon')[0]).addClass(ANIM).html(ICON[0]);
             
             layui.event.call(radio[0], MOD_NAME, 'radio('+ filter +')', {
               elem: radio[0]

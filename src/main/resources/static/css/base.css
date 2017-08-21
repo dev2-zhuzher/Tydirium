@@ -1,1 +1,16 @@
-﻿
+﻿/* 菜单样式 */
+.modeule-a{
+	vertical-align: middle;
+    line-height: 45px;
+}
+.module-name{
+    margin-top: -10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* footer样式 */
+.layui-footer p{
+	line-height: 44px;
+    text-align: center;
+}
