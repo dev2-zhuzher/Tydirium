@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
 	@Value("${state}")
 	private String state; 
 	
-	private static final String token_uri = "/api/lebang/staffs/me/jobs/all";
+	private static final String token_uri = "/api/lebang/oauth";
 
 	@Autowired
 	SysUserService sysUserService;
