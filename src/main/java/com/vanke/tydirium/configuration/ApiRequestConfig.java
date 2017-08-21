@@ -14,8 +14,8 @@ public class ApiRequestConfig {
 	
 
 	@Bean
-	public ZhuZherApiRequester zhuZherApiRequester() {
-		return new ZhuZherApiRequester();
+	public LeBangApiRequester zhuZherApiRequester() {
+		return new LeBangApiRequester();
 	}
 	
 }

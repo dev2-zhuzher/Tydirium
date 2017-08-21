@@ -1,6 +1,7 @@
 package com.vanke.tydirium.entity.sys;
 
 import java.io.Serializable;
+import java.lang.Thread.State;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -56,7 +57,7 @@ public class SysUser implements Serializable {
 	@Column(name = "sex", nullable = false, length = 10)
 	private Sex sex = Sex.UNKNOW;
 
-	@Column(name = "avatar_url", nullable = true, length = 100)
+	@Column(name = "avatar_url", nullable = true, length = 500)
 	private String avatarUrl;
 
 	@Column(name = "mobile", nullable = false, unique = true)
@@ -75,6 +76,15 @@ public class SysUser implements Serializable {
 
 	@Column(name = "deleted")
 	private Integer deleted = 0;
+	
+	@Column(name = "identity_id")
+	private String identity_id;
+	
+	@Column(name = "job_can_edit")
+	private String jobCanEdit;
+	
+	@Column(name = "state")
+	private Integer state;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -199,4 +209,34 @@ public class SysUser implements Serializable {
 		return updateTime;
 	}
 
+	public String getIdentityId() {
+		return identity_id;
+	}
+
+	public void setIdentityId(String identityId) {
+		this.identity_id = identityId;
+	}
+
+	public String getJobCanEdit() {
+		return jobCanEdit;
+	}
+
+	public void setJobCanEdit(String jobCanEdit) {
+		this.jobCanEdit = jobCanEdit;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	
+	
 }
