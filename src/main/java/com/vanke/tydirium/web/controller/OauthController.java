@@ -32,6 +32,8 @@ public class OauthController extends BaseController{
 	@Autowired
 	private SysUserService sysUserService;
 	
+	public static String ACCESSTOKEN = "";
+	
 	/**
 	 * zhuzher回调接收方法
 	 * @param model
@@ -60,6 +62,7 @@ public class OauthController extends BaseController{
 				logger.warn("认证失败：住这儿用户通过accessToken从falcon获取用户信息失败！");
 				return "login";
 			}
+			ACCESSTOKEN = accessToken;
 			//数据录入
 			SysUser sysUser = sysUserService.findByMobile(infoObj.getJSONObject("result").getString("mobile"));
 			if(sysUser == null){

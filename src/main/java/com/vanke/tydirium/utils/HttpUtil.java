@@ -71,7 +71,7 @@ public class HttpUtil extends BaseController{
 
 	public static String sendPost(String url, Map<String, String> params, Map<String, Object> headersMap) throws ClientProtocolException, IOException {
 		String content = null;
-		logger.info("url:::" + url);
+		logger.info("url:::" + url+"?"+params.get("token"));
 		Long currentTime = System.currentTimeMillis();
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT)
 				.setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT).setSocketTimeout(SOCKET_TIMEOUT).build();
