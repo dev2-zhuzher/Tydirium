@@ -4,13 +4,14 @@
 		<!-- 头部区域（可配合layui已有的水平导航） -->
 		<div class="layui-main">
 			<ul class="layui-nav" pc>
-				<li class="layui-nav-item"><a href="javascript:;">admin(超级管理员)</a>
+				<li class="layui-nav-item"><a href="javascript:;"><span
+						th:text="${session.user} == null ? '' : (${session.user.nickName} == null ? '' : ${session.user.nickName} )"></span></a>
 					<dl class="layui-nav-child">
 						<dd>
-							<a href="http://fly.layui.com/" target="_blank">个人信息</a>
+							<a href="#" target="_blank">个人信息</a>
 						</dd>
-						<dd>
-							<a href="http://fly.layui.com/" target="_blank">退出系统</a>
+						<dd> 
+							<a th:href="@{/logout?accessToken={accessToken}(accessToken = ${session.accessToken})}" target="_Self">退出系统</a>
 						</dd>
 					</dl></li>
 			</ul>
