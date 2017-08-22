@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.alibaba.fastjson.JSONObject;
 import com.vanke.tydirium.BaseTest;
 import com.vanke.tydirium.model.base.Result;
 import com.vanke.tydirium.model.bo.LogisticsInfo;
@@ -57,12 +56,14 @@ public class BaseServiceTest extends BaseTest {
 
 		if (result.getCode() == 0) {
 			LogisticsInfo info = (LogisticsInfo) result.getResult();
-			System.out.println(info.getLogistic_code());
-			System.out.println(info.getShipper_code());
+			System.out.println(info.getLogisticCode());
+			System.out.println(info.getShippercode());
 			System.out.println(info.getStatus());
 			List<TracesInfo> traces = info.getTraces();
 			for (TracesInfo tracesInfo : traces) {
-				System.out.println(JSONObject.toJSONString(tracesInfo));
+				System.out.println(tracesInfo.getAcceptStation());
+				System.out.println(tracesInfo.getAcceptTime());
+				System.out.println(tracesInfo.getRemark());
 			}
 		}
 	}
