@@ -7,14 +7,14 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 
 @SpringBootApplication
-public class AdminApplication extends SpringBootServletInitializer{
+public class TydiriumApplication extends SpringBootServletInitializer{
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(AdminApplication.class);
+		return application.sources(TydiriumApplication.class);
 	}
 	
 	public static void main(String[] args) {
-		SpringApplication.run(AdminApplication.class, args);
+		SpringApplication.run(TydiriumApplication.class, args);
 	}
 }
