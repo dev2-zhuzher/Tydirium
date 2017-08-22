@@ -8,20 +8,21 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.vanke.tydirium.BaseTest;
-import com.vanke.tydirium.model.base.Result;
+import com.vanke.tydirium.entity.enums.ShipperCodeEnum;
+import com.vanke.tydirium.model.base.ResponseInfo;
 import com.vanke.tydirium.model.bo.LogisticsInfo;
 import com.vanke.tydirium.model.bo.LogisticsInfo.TracesInfo;
-import com.vanke.tydirium.service.sys.BaseService;
+import com.vanke.tydirium.service.sys.LogisticsService;
 
 /**
  * 
  * 
- * @Description: 基础服务测试类
+ * @Description: 物流信息服务测试类
  *
  * @author: songjia
  * @date: 2017年8月21日 下午6:25:34
  */
-public class BaseServiceTest extends BaseTest {
+public class LogisticsServiceTest extends BaseTest {
 
 	/**
 	 * GET请求测试
@@ -45,14 +46,14 @@ public class BaseServiceTest extends BaseTest {
 	}
 
 	@Autowired
-	private BaseService baseService;
+	private LogisticsService logisticsService;
 
 	/**
 	 * 物流信息请求服务测试
 	 */
 	@Test
 	public void getLogisticsInfo() {
-		Result result = this.baseService.getLogisticsInfo("ems", "9891077826312");
+		ResponseInfo result = this.logisticsService.getLogisticsInfo(ShipperCodeEnum.EMS, "9891077826312");
 
 		if (result.getCode() == 0) {
 			LogisticsInfo info = (LogisticsInfo) result.getResult();

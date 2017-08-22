@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @JsonSerialize
 @JsonInclude(Include.NON_NULL)
-public class Result implements Serializable {
+public class ResponseInfo implements Serializable {
 
 	private static final long serialVersionUID = -2210269174549937804L;
 
@@ -73,41 +73,41 @@ public class Result implements Serializable {
 		this.result = result;
 	}
 
-	public Result(Integer code, String errorCode, String message) {
+	public ResponseInfo(Integer code, String errorCode, String message) {
 		super();
 		this.code = code;
 		this.errorCode = errorCode;
 		this.message = message;
 	}
 
-	public Result(Integer code, Object result) {
+	public ResponseInfo(Integer code, Object result) {
 		super();
 		this.code = code;
 		this.result = result;
 		this.message = SUCCESS_MSG;
 	}
 
-	public Result(Integer code, String message) {
+	public ResponseInfo(Integer code, String message) {
 		super();
 		this.code = code;
 		this.message = message;
 	}
 
-	public Result(Integer code) {
+	public ResponseInfo(Integer code) {
 		super();
 		this.code = code;
 		this.message = SUCCESS_MSG;
 	}
 
-	public Result() {
+	public ResponseInfo() {
 		super();
 	}
 
-	public static Result getFailInstance(String errorMsg) {
-		return new Result(Result.FAIL, errorMsg);
+	public static ResponseInfo getFailInstance(String errorMsg) {
+		return new ResponseInfo(ResponseInfo.FAIL, errorMsg);
 	}
 
-	public static Result getSuccessInstance(Object result) {
-		return new Result(Result.SUCCESS, result);
+	public static ResponseInfo getSuccessInstance(Object result) {
+		return new ResponseInfo(ResponseInfo.SUCCESS, result);
 	}
 }
