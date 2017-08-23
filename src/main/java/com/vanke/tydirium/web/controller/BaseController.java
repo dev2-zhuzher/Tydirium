@@ -12,7 +12,10 @@ import com.vanke.tydirium.web.common.ResponseData;
 public class BaseController {
 
 	protected String REDIRECT = "redirect:"; // 执行redirect操作的前缀
-
+	/** 当前页数标识 */
+	protected static final String PAGE = "page";
+	/** 当前页条数标识*/
+	protected static final String SIZE = "size";
 	protected static final String DEFAULT_PAGE_SIZE = "10"; // 分页,默认分页数量
 	protected static final String DEFAULT_PAGE = "0"; // 分页,默认第一页
 	protected static final Logger logger = Logger.getLogger(BaseController.class);
