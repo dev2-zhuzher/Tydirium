@@ -16,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.vanke.tydirium.entity.lebang.SysLeBangRole;
 import com.vanke.tydirium.repository.lebang.SysLeBangRoleRepository;
 import com.vanke.tydirium.service.lebang.SysLeBangRoleService;
+
 /**
  * 乐邦接口实现层
+ * 
  * @author v-guosq02
  *
  */
@@ -28,18 +30,20 @@ public class SysLeBangRoleServiceImpl implements SysLeBangRoleService {
 	@Autowired
 	private SysLeBangRoleRepository sysLeBangRoleRepository;
 
-	
 	/**
 	 * 更新或新增
+	 * 
+	 * @param role
 	 */
 	@Override
 	public void save(SysLeBangRole role) {
 		sysLeBangRoleRepository.save(role);
 	}
-	
+
 	/**
 	 * 根据岗位信息查询
 	 * 
+	 * @param leBangRoleCode
 	 */
 	@Override
 	public SysLeBangRole findByLeBangRoleCode(String leBangRoleCode) {
@@ -47,8 +51,8 @@ public class SysLeBangRoleServiceImpl implements SysLeBangRoleService {
 	}
 
 	/**
-	 * /**
 	 * 根据岗位信息分页查询
+	 * 
 	 * @param findLeBangCode
 	 * @param pageable
 	 */
@@ -59,7 +63,7 @@ public class SysLeBangRoleServiceImpl implements SysLeBangRoleService {
 			public Predicate toPredicate(Root<SysLeBangRole> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Predicate predicate = cb.conjunction();
 				if (StringUtils.isNotEmpty(findLeBangCode)) {
-					predicate = cb.like(root.<String> get("leBangRoleCode"), "%" + findLeBangCode + "%");
+					predicate = cb.like(root.<String>get("leBangRoleCode"), "%" + findLeBangCode + "%");
 				}
 				return predicate;
 			}
@@ -68,6 +72,7 @@ public class SysLeBangRoleServiceImpl implements SysLeBangRoleService {
 
 	/**
 	 * 通过id查询乐邦信息
+	 * 
 	 * @param id
 	 */
 	@Override

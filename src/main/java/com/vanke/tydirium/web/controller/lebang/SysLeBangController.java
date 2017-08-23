@@ -27,8 +27,6 @@ import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.web.controller.BaseController;
 
 /**
- * 
- * 
  * @Description: 乐邦角色与本地角色关联管理
  *
  * @author: 郭时青
@@ -48,7 +46,15 @@ public class SysLeBangController extends BaseController {
 	@Autowired
 	private SysRoleService sysRoleService;
 
-	@RequestMapping(value = "/info")
+	/**
+	 * 查询乐邦基本信息
+	 * @param model
+	 * @param page
+	 * @param size
+	 * @param findLeBangCode
+	 * @return
+	 */
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String leBangInfos(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
 			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
 			@RequestParam(value = FINDLEBANGCODE, required = false) String findLeBangCode) {
@@ -59,6 +65,12 @@ public class SysLeBangController extends BaseController {
 		return "/sys/leBang/list";
 	}
 
+	/**
+	 * 配置乐邦角色权限
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
 	public String leBangInfo(Model model, @PathVariable Integer id) {
 		SysLeBangRole leBangRole = sysLeBangRoleService.findOne(id);
@@ -67,7 +79,13 @@ public class SysLeBangController extends BaseController {
 		model.addAttribute(ROLE, sysRole);
 		return "/sys/leBang/authority";
 	}
-
+	/**
+	 * 更新或新增
+	 * @param model
+	 * @param leBangRole
+	 * @param bindingResults
+	 * @return
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Model model, @Valid SysLeBangRole leBangRole, BindingResult bindingResults) {
 		long leBangRoleId = leBangRole.getId() == null ? 0 : leBangRole.getId();
@@ -76,7 +94,7 @@ public class SysLeBangController extends BaseController {
 			return super.REDIRECT + "/admin/sys/lebang/info/" + leBangRoleId;
 		} else {
 			SysLeBangRole sysLeBangRole = sysLeBangRoleService.findByLeBangRoleCode(leBangRole.getLeBangRoleCode());
-			if(sysLeBangRole == null){
+			if (sysLeBangRole == null) {
 				sysLeBangRole = new SysLeBangRole();
 			}
 			sysLeBangRole.setLebangRoleCode(leBangRole.getLeBangRoleCode());
