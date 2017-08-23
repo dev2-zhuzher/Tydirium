@@ -36,7 +36,14 @@ public class SysLeBangController extends BaseController{
 	private SysRoleService sysRoleService;
 	
 	private static final String FINDLEBANGCODE = "findLeBangCode";
-	
+	/**
+	 * 查询乐邦权限的信息
+	 * @param model
+	 * @param page
+	 * @param size
+	 * @param findLeBangCode
+	 * @return
+	 */
 	@RequestMapping(value = "/info")
 	public String leBangInfos(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
 			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
@@ -51,6 +58,12 @@ public class SysLeBangController extends BaseController{
 		return "/sys/leBang/list";
 	}
 	
+	/**
+	 * 查询权限配置信息
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/info/{id}",method = RequestMethod.GET)
 	public String leBangInfo(Model model, @PathVariable Integer id){
 		
@@ -65,7 +78,13 @@ public class SysLeBangController extends BaseController{
 		return "/sys/leBang/authority";
 	}
 	
-	
+	/**
+	 * 更新或新增
+	 * @param model
+	 * @param leBangRoleCode
+	 * @param roleId
+	 * @return
+	 */
 	@RequestMapping(value = "/save")
 	public String save(Model model,@RequestParam("leBangRoleCode") String leBangRoleCode,@RequestParam("roleId") Long roleId){
 		SysLeBangRole sysLeBangRole = sysLeBangRoleService.findByLeBangRoleCode(leBangRoleCode);
