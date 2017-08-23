@@ -1,0 +1,58 @@
+﻿.project-form {
+	width: 500px;
+	height: 500px;
+	margin: 0 auto;
+	position: relative; /*脱离文档流*/
+	top: 25%; /*偏移*/
+}
+
+.project-welcome {
+	height: 75px;
+	background: #009688;
+	padding-top: 10px;
+}
+
+.project-welcome p {
+	font-size: 16px;
+	color: white;
+}
+
+.project-please {
+	margin: 15px;
+}
+
+.project-welcome span {
+	color: #FF5722;
+	font-size: 25px;
+	margin: 15px;
+}
+
+.project-chose {
+	height: 400px;
+	overflow: auto;
+	background: white;
+}
+
+.project-login {
+	height: 50px;
+	background: #009688;
+}
+
+.project-login input {
+	margin-top: 6px;
+	float: right; 
+}
+
+.project-login a {
+	float: right;
+	margin: 6px;
+	margin-right: 10px;
+}
+
+.project-error {
+	text-align: center;
+	line-height: 50px;
+	color: #8e1f1f;
+	float: left;
+	margin-left: 15px;
+}
