@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -96,6 +95,10 @@ public class SysLeBangRole implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public void setLeBangRoleCode(String leBangRoleCode) {
+		this.leBangRoleCode = leBangRoleCode;
 	}
 
 }
