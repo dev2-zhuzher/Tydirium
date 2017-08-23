@@ -30,6 +30,7 @@ public class SysUserServiceTest {
 	private SysUserService sysUserService;
 
 	private static final String USER_MOBILE = "17688968886";
+	private static final String USER_NICKNAME="penn";
 
 	private Long userId = 0L;
 
@@ -55,6 +56,14 @@ public class SysUserServiceTest {
 	public void testFindAll() {
 		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "id"));
 		Page<SysUser> pager = sysUserService.findAll(pageable);
+		List<SysUser> users = pager.getContent();
+		Assert.assertEquals(1, users.size());
+	}
+	
+	@Test
+	public void testFindByNameAndMobile() {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "id"));
+		Page<SysUser> pager = sysUserService.findAll(USER_NICKNAME, USER_MOBILE, pageable);
 		List<SysUser> users = pager.getContent();
 		Assert.assertEquals(1, users.size());
 	}
