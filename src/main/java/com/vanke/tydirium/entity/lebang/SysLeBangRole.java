@@ -18,6 +18,12 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  * @author v-guosq02
  *
+ * 
+ * 
+ * @Description: 乐邦项目角色对应本地的角色的关系
+ *
+ * @author: 郭时青
+ * @date: 2017年8月22日 下午12:02:33
  */
 @Entity
 @Table(name = "sys_lebang_mate")

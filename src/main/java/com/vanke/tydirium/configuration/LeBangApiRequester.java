@@ -20,6 +20,12 @@ import com.vanke.tydirium.tools.HttpTool;
  * 
  * @author Joey
  *
+ * 
+ * 
+ * @Description: 乐邦接口请求调用
+ *
+ * @author: 郭时青
+ * @date: 2017年8月23日 上午11:55:31
  */
 public class LeBangApiRequester {
 
@@ -31,13 +37,19 @@ public class LeBangApiRequester {
 	private String lebang_api_host;
 	@Value("${redirect_url}")
 	private String lebang_redirect_uri;
-	
 	private static final String token_uri = "/api/lebang/oauth/access_token";
 	private static final String info_url = "/api/lebang/staffs/me/detail";
 	private static final String jobs_url = "/api/lebang/staffs/me/jobs";
 	
 	private final Logger logger = Logger.getLogger(this.getClass());
-	
+
+	// json 字段标识 ：结果
+	private static final String RESULT = "result";
+	// json 字段标识 ：角色代码
+	private static final String ROLECODE = "role_code";
+	// json 字段标识 ：项目代码
+	private static final String PROJECTCODE = "project_code";
+
 	/**
 	 * 获取AccessToken
 	 * 
@@ -54,7 +66,6 @@ public class LeBangApiRequester {
 		params.put("redirect_uri", lebang_redirect_uri);
 		return HttpTool.sendPost(lebang_api_host + token_uri, params, null);
 	}
-	
 	/**
 	 * 获取用户详细信息
 	 * 
@@ -65,13 +76,13 @@ public class LeBangApiRequester {
 	public String requestUserInfo(String accessToken) throws Exception {
 		return HttpTool.sendGet(lebang_api_host + info_url + "?access_token=" + accessToken);
 	}
-	
 	/**
 	 * 获取用户工作列表
 	 * 
 	 * @param accessToken
 	 * @return
 	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public List<Entry<String, String>> requestUserJobs(String accessToken) throws Exception {
 		List<Entry<String, String>> result = new ArrayList<Entry<String, String>>();
@@ -93,6 +104,25 @@ public class LeBangApiRequester {
 		
 		return result;
 	}
-	
-	
+
+	/**
+	 * 获取当前登陆用户的项目和角色信息
+	 * 
+	 * @param accessToken
+	 * @return
+	 * @throws Exception
+	 */
+	public JSONArray requestProjectAndRole(String accessToken) throws Exception {
+		String response = HttpTool
+				.sendGet(lebang_api_host + "/api/lebang/staffs/me/jobs" + "?access_token=" + accessToken);
+		JSONObject responseJson = JSON.parseObject(response);
+		JSONArray projects = new JSONArray();
+		if (responseJson.containsKey(RESULT)) {
+			projects = responseJson.getJSONArray(RESULT);
+			return projects;
+		} else {
+			logger.warn("请求助这儿当前用户的项目和角色信息失败：" + accessToken);
+			throw new RuntimeException("请求接口失败!");
+		}
+	}
 }
