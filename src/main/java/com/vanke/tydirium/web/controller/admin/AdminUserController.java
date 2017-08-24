@@ -3,7 +3,6 @@ package com.vanke.tydirium.web.controller.admin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.vanke.tydirium.annotation.AdminCheckLogin;
 import com.vanke.tydirium.configuration.LeBangApiRequester;
+import com.vanke.tydirium.constants.CommonConstants;
 import com.vanke.tydirium.entity.json.LeBangUser;
 import com.vanke.tydirium.entity.lebang.SysLeBangRole;
 import com.vanke.tydirium.entity.log.LogLogin;
@@ -41,10 +40,11 @@ import com.vanke.tydirium.web.controller.BaseController;
  * 
  * @Description: 台管理员登录渠道
  *
- * @author: vanke-yuzn05 - vankeadmin
+ * @author: vanke-yuzn05
  * @date: 2017年8月24日 上午10:08:55
  */
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminUserController extends BaseController {
 
 	public static final String ACCESSTOKEN = "access_token";
@@ -56,8 +56,6 @@ public class AdminUserController extends BaseController {
 	public static final String ROLECODE = "roleCode";
 
 	public static final String MSG = "msg";
-
-	public static final String USER = "user";
 
 	public static final String RESULT = "result";
 
@@ -128,7 +126,12 @@ public class AdminUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String login(HttpServletRequest request) {
+		SysUser user = (SysUser) request.getSession().getAttribute(CommonConstants.SESSION_USER_KEY);
+		// 判断是否已登陆
+		if (user != null) {
+			return "redirect:/admin/index";
+		}
 		return "login";
 	}
 
@@ -150,7 +153,7 @@ public class AdminUserController extends BaseController {
 		request.getSession().setAttribute("user", sysUser);
 
 		// 登陆成功，跳转到首页
-		return "main";
+		return "redirect:/admin/index";
 	}
 
 	/**
@@ -158,9 +161,10 @@ public class AdminUserController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main() {
-		return "main";
+	@AdminCheckLogin
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String toIndex() {
+		return "index";
 	}
 
 	/**
@@ -184,69 +188,6 @@ public class AdminUserController extends BaseController {
 		attr.addAttribute("state", state);
 		attr.addAttribute("sign", sign);
 		return "redirect:" + lebangApiHostOauth;
-	}
-
-	/**
-	 * 住这儿，乐邦登陆认证成功之后的回调
-	 * 
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/oauth/token", method = RequestMethod.GET)
-	public String oauth(Model model, HttpServletRequest request, HttpServletResponse response) {
-		// 获取code
-		String code = request.getParameter("code");
-		String accessToken = request.getParameter("access_token");
-		String roleCode = request.getParameter("roleCode");
-		String projectCode = request.getParameter("projectCode");
-		String msg = request.getParameter("msg");
-		if (StringUtils.isNotEmpty(msg)) {
-			model.addAttribute("msg", msg);
-		}
-		if (StringUtils.isNotEmpty(roleCode)) {
-			model.addAttribute("roleCode", roleCode);
-		}
-		if (StringUtils.isNotEmpty(projectCode)) {
-			model.addAttribute("projectCode", projectCode);
-		}
-		if (StringUtils.isNotEmpty(code)) {
-			logger.info("用户认证，获取code值成功：" + code);
-			// 通过code获取token信息
-			try {
-				String tokenResp = leBangApiRequester.requestAccessToken(code);
-				JSONObject tokenObj = JSON.parseObject(tokenResp);
-				if (tokenObj.containsKey("access_token") && StringUtils.isEmpty(accessToken)) {
-					accessToken = tokenObj.getString("access_token");
-				}
-				if (StringUtils.isEmpty(accessToken)) {
-					logger.warn("认证失败：住这儿用户通过传入code获取accessToken失败！");
-					return "redirect:/auto/login";
-				}
-				// 获取当前登陆用户的项目和角色信息
-				JSONArray projectAndRole = leBangApiRequester.requestProjectAndRole(accessToken);
-				model.addAttribute(PROJECTANDROLE, projectAndRole);
-				// 获取用户信息
-				String userInfo = leBangApiRequester.requestUserInfo(accessToken);
-				JSONObject userInfoJson = JSON.parseObject(userInfo);
-				if (userInfoJson.containsKey(RESULT)) {
-					userInfoJson = userInfoJson.getJSONObject(RESULT);
-					if (userInfoJson.containsKey(NICKNAME)) {
-						model.addAttribute(NICKNAME, userInfoJson.getString(NICKNAME));
-					}
-				}
-				model.addAttribute(CODE, code);
-				model.addAttribute(ACCESSTOKEN, accessToken);
-				return "project";
-			} catch (Exception e) {
-				logger.error("登陆失败:" + e.toString());
-			}
-			return "redirect:/auto/login";
-		} else {
-			logger.warn("认证失败：住这儿登陆获取code失败！");
-		}
-		return "redirect:/auto/login";
 	}
 
 	/**
@@ -313,21 +254,21 @@ public class AdminUserController extends BaseController {
 					redirectAttr.addAttribute(PROJECTCODE, projectCode);
 					redirectAttr.addAttribute(MSG, "当前角色无权登入系统");
 					// 无权进入：跳至选择项目角色页面
-					return "redirect:/oauth/token";
+					return "redirect:/admin/oauth/token";
 				}
 				// 记录登录成功日志
 				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(),
 						HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
 				logLoginservice.save(logLogin);
 				// 用户信息存入session
-				request.getSession().setAttribute(USER,
+				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY,
 						sysUserService.findByMobile(userInfoJson.getResult().getMobile()));
 				request.getSession().setAttribute(ACCESSTOKEN, accessToken);
 				logger.info("登入成功：" + sysUser.getFullName());
-				return "redirect:/main";
+				return "redirect:/admin/index";
 			} catch (Exception e) {
 				logger.error("选择角色登陆失败，roleCode：" + roleCode + ",错误详情：" + e.toString());
-				return "redirect:/auto/login";
+				return "redirect:/admin/auto/login";
 			}
 		} else {
 			logger.info("获取不到accessToken 或  roleCode ！");
@@ -343,15 +284,17 @@ public class AdminUserController extends BaseController {
 	 * @param response
 	 * @return
 	 */
+	@AdminCheckLogin
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(RedirectAttributes redirectAttr, HttpServletRequest request, HttpServletResponse response) {
 		String accessToken = request.getParameter("accessToken");
 		// 清除session中的属性
-		Enumeration em = request.getSession().getAttributeNames();
-		while (em.hasMoreElements()) {
-			logger.warn("remove session key : " + em.nextElement());
-			request.getSession().removeAttribute(em.nextElement().toString());
-		}
+//		Enumeration em = request.getSession().getAttributeNames();
+//		while (em.hasMoreElements()) {
+//			logger.warn("remove session key : " + em.nextElement());
+//			request.getSession().removeAttribute(em.nextElement().toString());
+//		}
 		// 使session失效
 		request.getSession().invalidate();
 		// 更新登出日志
@@ -360,13 +303,13 @@ public class AdminUserController extends BaseController {
 			login.setLogoutTime(new Date());
 			logLoginService.save(login);
 		}
-		// 跳转回登录页
+		// 跳转回住这儿登录页
 		if (StringUtils.isNotEmpty(accessToken)) {
 			redirectAttr.addAttribute(TOKEN, accessToken);
 			redirectAttr.addAttribute(NEXTURL, redirectUriLogin);
 			return "redirect:" + lebangApiHostOauthOut;
 		}
-		return "redirect:/login";
+		return "redirect:/admin/login";
 	}
 
 }
