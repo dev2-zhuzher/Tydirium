@@ -1,8 +1,9 @@
-package com.vanke.tydirium.web.controller;
+package com.vanke.tydirium.web.controller.admin;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,16 +34,18 @@ import com.vanke.tydirium.service.log.LogLoginService;
 import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.service.sys.SysUserService;
 import com.vanke.tydirium.tools.HttpTool;
+import com.vanke.tydirium.web.controller.BaseController;
 
 /**
  * 
- * @Description: 登陆操作
+ * 
+ * @Description: 台管理员登录渠道
  *
- * @author: vanke-yuzn05
- * @date: 2017年8月15日 上午11:46:13
+ * @author: vanke-yuzn05 - vankeadmin
+ * @date: 2017年8月24日 上午10:08:55
  */
 @Controller
-public class LoginController extends BaseController {
+public class AdminUserController extends BaseController {
 
 	public static final String ACCESSTOKEN = "access_token";
 
@@ -64,33 +67,58 @@ public class LoginController extends BaseController {
 
 	public static final String PROJECTCODE = "projectCode";
 
+	public final static String TOKEN = "token";
+
+	public final static String NEXTURL = "next_url";
+
+	/** 鉴权退出服务地址 */
+	@Value("${lebang_api_host_oauth_out}")
+	private String lebangApiHostOauthOut;
+
+	/** 跳转至登陆地址 */
+	@Value("${redirect_uri_login}")
+	private String redirectUriLogin;
+
+	@Autowired
+	private LogLoginService logLoginService;
+
 	/** 鉴权服务地址 */
 	@Value("${lebang_api_host_oauth}")
 	private String lebangApiHostOauth;
+
 	/** 邮件申请获得的客户端ID */
 	@Value("${client_id}")
 	private String clientId;
+
 	/** 秘钥 */
 	@Value("${client_secret}")
 	private String clientSecret;
+
 	/** 跳转地址 */
 	@Value("${redirect_uri}")
 	private String redirectUri;
+
 	@Value("${response_type}")
 	private String responseType;
+
 	@Value("${scopes}")
 	private String scopes;
+
 	@Value("${sign}")
 	private String sign;
 
 	@Autowired
 	SysUserService sysUserService;
+
 	@Autowired
 	SysRoleService sysRoleService;
+
 	@Autowired
 	SysLeBangRoleService sysLeBangRoleService;
+
 	@Autowired
 	LeBangApiRequester leBangApiRequester;
+
 	@Autowired
 	private LogLoginService logLoginservice;
 
@@ -100,17 +128,38 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}
 
 	/**
-	 * 跳转至后台首页
+	 * 本地登陆（非oauth登陆）
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
+	public String login(Model model, HttpServletRequest request, HttpServletResponse response) {
+
+		String account = request.getParameter("account");
+
+		SysUser sysUser = sysUserService.findByMobile(account);
+
+		request.getSession().setAttribute("user", sysUser);
+
+		// 登陆成功，跳转到首页
+		return "main";
+	}
+
+	/**
+	 * 登陆成功跳转至后台首页
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main() {
 		return "main";
 	}
 
@@ -140,24 +189,27 @@ public class LoginController extends BaseController {
 	/**
 	 * 住这儿，乐邦登陆认证成功之后的回调
 	 * 
+	 * @param model
+	 * @param request
+	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/oauth/token", method = RequestMethod.GET)
 	public String oauth(Model model, HttpServletRequest request, HttpServletResponse response) {
 		// 获取code
-		String code = request.getParameter(CODE);
-		String accessToken = request.getParameter(ACCESSTOKEN);
-		String roleCode = request.getParameter(ROLECODE);
-		String projectCode = request.getParameter(PROJECTCODE);
-		String msg = request.getParameter(MSG);
+		String code = request.getParameter("code");
+		String accessToken = request.getParameter("access_token");
+		String roleCode = request.getParameter("roleCode");
+		String projectCode = request.getParameter("projectCode");
+		String msg = request.getParameter("msg");
 		if (StringUtils.isNotEmpty(msg)) {
-			model.addAttribute(MSG, msg);
+			model.addAttribute("msg", msg);
 		}
 		if (StringUtils.isNotEmpty(roleCode)) {
-			model.addAttribute(ROLECODE, roleCode);
+			model.addAttribute("roleCode", roleCode);
 		}
 		if (StringUtils.isNotEmpty(projectCode)) {
-			model.addAttribute(PROJECTCODE, projectCode);
+			model.addAttribute("projectCode", projectCode);
 		}
 		if (StringUtils.isNotEmpty(code)) {
 			logger.info("用户认证，获取code值成功：" + code);
@@ -165,8 +217,8 @@ public class LoginController extends BaseController {
 			try {
 				String tokenResp = leBangApiRequester.requestAccessToken(code);
 				JSONObject tokenObj = JSON.parseObject(tokenResp);
-				if (tokenObj.containsKey(ACCESSTOKEN) && StringUtils.isEmpty(accessToken)) {
-					accessToken = tokenObj.getString(ACCESSTOKEN);
+				if (tokenObj.containsKey("access_token") && StringUtils.isEmpty(accessToken)) {
+					accessToken = tokenObj.getString("access_token");
 				}
 				if (StringUtils.isEmpty(accessToken)) {
 					logger.warn("认证失败：住这儿用户通过传入code获取accessToken失败！");
@@ -282,4 +334,39 @@ public class LoginController extends BaseController {
 			return "redirect:/login";
 		}
 	}
+
+	/**
+	 * 用户登出
+	 * 
+	 * @param redirectAttr
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(RedirectAttributes redirectAttr, HttpServletRequest request, HttpServletResponse response) {
+		String accessToken = request.getParameter("accessToken");
+		// 清除session中的属性
+		Enumeration em = request.getSession().getAttributeNames();
+		while (em.hasMoreElements()) {
+			logger.warn("remove session key : " + em.nextElement());
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		// 使session失效
+		request.getSession().invalidate();
+		// 更新登出日志
+		LogLogin login = logLoginService.findLogLoginBySessionId(request.getSession().getId());
+		if (login != null) {
+			login.setLogoutTime(new Date());
+			logLoginService.save(login);
+		}
+		// 跳转回登录页
+		if (StringUtils.isNotEmpty(accessToken)) {
+			redirectAttr.addAttribute(TOKEN, accessToken);
+			redirectAttr.addAttribute(NEXTURL, redirectUriLogin);
+			return "redirect:" + lebangApiHostOauthOut;
+		}
+		return "redirect:/login";
+	}
+
 }
