@@ -25,7 +25,6 @@ public class CryptoUtil {
 	 *            字符串长度
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public static String getRandomString(int len) {
 		return RandomStringUtils.randomAlphanumeric(len);
 	}
