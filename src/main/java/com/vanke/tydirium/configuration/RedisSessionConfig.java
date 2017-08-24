@@ -12,8 +12,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * @date: 2017年8月23日 上午11:16:16
  */
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60 * 2)
-// 2分钟失效
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1500) // 30分钟失效（源码默认加5分钟）
 public class RedisSessionConfig {
 
 }
