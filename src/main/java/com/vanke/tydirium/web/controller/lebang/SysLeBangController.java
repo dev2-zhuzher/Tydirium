@@ -36,9 +36,10 @@ import com.vanke.tydirium.web.controller.BaseController;
 @RequestMapping(value = "/admin/sys/lebang")
 public class SysLeBangController extends BaseController {
 
-	public static final String FINDLEBANGCODE = "findLeBangCode";
-	public static final String LEBANGROLE = "leBangRole";
-	public static final String ROLE = "role";
+	/** 当前页数 */
+	public static final String PAGE = "page";
+	/** 当前页条数 */
+	public static final String SIZE = "size";
 
 	@Autowired
 	private SysLeBangRoleService sysLeBangRoleService;
@@ -46,41 +47,73 @@ public class SysLeBangController extends BaseController {
 	@Autowired
 	private SysRoleService sysRoleService;
 
+	private static final String FINDLEBANGCODE = "findLeBangCode";
+
 	/**
 	 * 查询乐邦基本信息
+	 * 
 	 * @param model
 	 * @param page
 	 * @param size
 	 * @param findLeBangCode
 	 * @return
 	 */
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	@RequestMapping(value = "/info")
 	public String leBangInfos(Model model, @RequestParam(value = PAGE, defaultValue = DEFAULT_PAGE) Integer page,
 			@RequestParam(value = SIZE, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
 			@RequestParam(value = FINDLEBANGCODE, required = false) String findLeBangCode) {
+
 		Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 		Page<SysLeBangRole> pager = sysLeBangRoleService.findAll(findLeBangCode, pageable);
-		model.addAttribute(FINDLEBANGCODE, findLeBangCode);
-		model.addAttribute(CommonConstants.PAGER, pager);
+
+		model.addAttribute("findLeBangCode", findLeBangCode);
+		model.addAttribute("pager", pager);
+
 		return "/sys/leBang/list";
 	}
 
 	/**
 	 * 配置乐邦角色权限
+	 * 
 	 * @param model
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
 	public String leBangInfo(Model model, @PathVariable Integer id) {
+
 		SysLeBangRole leBangRole = sysLeBangRoleService.findOne(id);
+
 		List<SysRole> sysRole = sysRoleService.findAll();
-		model.addAttribute(LEBANGROLE, leBangRole);
-		model.addAttribute(ROLE, sysRole);
+
+		model.addAttribute("leBangRole", leBangRole);
+
+		model.addAttribute("role", sysRole);
+
 		return "/sys/leBang/authority";
 	}
+
 	/**
 	 * 更新或新增
+	 * 
+	 * @param model
+	 * @param leBangRoleCode
+	 * @param roleId
+	 * @return
+	 */
+	@RequestMapping(value = "/save")
+	public String save(Model model, @RequestParam("leBangRoleCode") String leBangRoleCode,
+			@RequestParam("roleId") Long roleId) {
+		SysLeBangRole sysLeBangRole = sysLeBangRoleService.findByLeBangRoleCode(leBangRoleCode);
+		sysLeBangRole.setRoleId(roleId);
+		sysLeBangRole.setUpdateTime(new Date());
+		sysLeBangRoleService.save(sysLeBangRole);
+		return super.REDIRECT + "/admin/sys/lebang/info";
+	}
+
+	/**
+	 * 更新或新增
+	 * 
 	 * @param model
 	 * @param leBangRole
 	 * @param bindingResults

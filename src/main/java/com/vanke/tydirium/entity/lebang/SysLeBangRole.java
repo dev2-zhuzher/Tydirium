@@ -13,6 +13,10 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * 乐邦角色关系基表
+ * 
+ * @author v-guosq02
+ *
  * 
  * 
  * @Description: 乐邦项目角色对应本地的角色的关系

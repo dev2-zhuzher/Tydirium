@@ -63,6 +63,7 @@ public class SysLeBangRoleServiceImpl implements SysLeBangRoleService {
 			public Predicate toPredicate(Root<SysLeBangRole> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Predicate predicate = cb.conjunction();
 				if (StringUtils.isNotEmpty(findLeBangCode)) {
+					predicate = cb.like(root.<String> get("leBangRoleCode"), "%" + findLeBangCode + "%");
 					predicate = cb.like(root.<String>get("leBangRoleCode"), "%" + findLeBangCode + "%");
 				}
 				return predicate;
