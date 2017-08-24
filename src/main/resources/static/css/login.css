@@ -39,7 +39,7 @@
 
 /*弹出框皮肤*/
 .pm-login-input {
-	width: 280px !important;
+	width: 60% !important;
 }
 
 body .pm-layer-login {
@@ -61,4 +61,14 @@ body .pm-layer-login .layui-layer-content {
 .layui-elem-field legend {
 	margin-left: 152px !important;
 	font-size: 30px !important;
+}
+.check-code{
+	width: 50%;
+}
+.img-code{
+	width: 116px;
+	padding: 10px 0px 0px 40%;
+}
+.img{
+	position: absolute;left: 49%;bottom:33.5%
 }

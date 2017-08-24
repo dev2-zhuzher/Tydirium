@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="menu">
 	<!-- 侧边导航: user-role-module-resource -->
-	<div th:if="${session.user} != null ? ${session.user.roles} != null : false">
-		<ul class="layui-nav layui-nav-tree" lay-filter="test" th:each="role , roleStat : ${session.user.roles}" >
+	<div th:if="${session.LOGINED_USER} != null ? ${session.LOGINED_USER.roles} != null : false">
+		<ul class="layui-nav layui-nav-tree" lay-filter="test" th:each="role , roleStat : ${session.LOGINED_USER.roles}" >
 			<li class="layui-nav-item layui-nav-itemed" th:each="module , moduleStat : ${role.modules}">
 				 <a href="javascript:;" class="modeule-a" >
 				 	<span th:utext="|<i class='layui-icon myicon'>${module.icon==null?'':'&#'}${module.icon==null?'':module.icon}</i>|"></span>
