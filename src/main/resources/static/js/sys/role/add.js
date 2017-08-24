@@ -14,6 +14,12 @@ $(function() {
 				if(checkRole.length == 0){
 					return "关联模块必选";
 				}
+			},
+			roleName : function(value){
+				var roleName = $("input[name='name']").val();
+				if(roleName.indexOf("ROLE_") != 0){
+					return "角色名称必须以   ROLE_ 开头";
+				}
 			}
 		});
 
