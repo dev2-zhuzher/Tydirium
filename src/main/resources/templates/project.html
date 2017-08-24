@@ -8,7 +8,7 @@
 <link href="/css/project.css" rel="stylesheet" />
 </head>
 <body class="layui-bg-black">
-	<form class="layui-form project-form" action="/oauth/login"
+	<form class="layui-form project-form" action="/admin/oauth/login"
 		method="post">
 		<div class="project-welcome">
 			<p>
@@ -37,7 +37,7 @@
 				type="hidden" name="description"> <input type="hidden"
 				name="code" th:value="${code}"> <input type="hidden"
 				name="access_token" th:value="${access_token}"> <a
-				class="layui-btn layui-btn-primary" href="/auto/login">返回</a> <input
+				class="layui-btn layui-btn-primary" href="/admin/auto/login">返回</a> <input
 				class="layui-btn layui-btn-primary" type="submit" value="登陆"
 				lay-submit="" lay-filter="project">
 			<div class="project-error" th:text="${msg}"></div>

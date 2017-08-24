@@ -23,23 +23,25 @@ layui.define(['element', 'layer', 'form'], function (exports) {
             }
         },
     });
-    //监听登陆提交
+  //监听登陆提交
     form.on('submit(login)', function (data) {
-        var index = layer.load(1);
-        setTimeout(function () {
-            //模拟登陆
-            layer.close(index);
-            if (data.field.account != 'admin' || data.field.password != '123456') {
-                layer.msg('账号或者密码错误', { icon: 5 });
-            } else {
-                layer.msg('登陆成功，正在跳转......', { icon: 6 });
-                layer.closeAll('page');
-                setTimeout(function () {
-                    location.href = "/index/session";
-                }, 500);
-            }
-        }, 400);
-        return false;
+    	$.ajax({
+            url:"/admin/check",
+            type:"POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",  
+            data : JSON.stringify({loginName: data.field.account,password:data.field.password,checkCode:data.field.checkcode}),
+            success:function(result){
+				if(result.code == 0){
+					layer.msg('登陆成功，正在跳转......', { icon: 6 });
+					location.href = "/admin/index"
+				}else{
+					layer.msg(result.message, { icon: 5 });
+					// 刷新验证码
+					reloadCode();
+				}
+            },
+        });    
     });
     //检测键盘按下
     $('body').keydown(function (e) {
@@ -74,3 +76,8 @@ layui.define(['element', 'layer', 'form'], function (exports) {
     exports('login', {});
 });
 
+//刷新验证码
+function reloadCode() {
+    var time = new Date().getTime();
+    document.getElementById("imagecode").src = "/admin/image/update?d=" + time;
+}
