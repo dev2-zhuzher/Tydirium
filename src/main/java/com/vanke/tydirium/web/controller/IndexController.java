@@ -15,8 +15,8 @@ import com.vanke.tydirium.entity.sys.SysModule;
 import com.vanke.tydirium.entity.sys.SysResource;
 import com.vanke.tydirium.entity.sys.SysRole;
 import com.vanke.tydirium.entity.sys.SysUser;
+import com.vanke.tydirium.model.base.ResponseInfo;
 import com.vanke.tydirium.service.sys.SysUserService;
-import com.vanke.tydirium.web.common.ResponseData;
 
 @Controller
 @RequestMapping(value = "/index")
@@ -26,8 +26,8 @@ public class IndexController extends BaseController {
 	SysUserService sysUserService;
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public ResponseData hello(HttpServletRequest request) {
-		return new ResponseData(0, "hello", "success");
+	public ResponseInfo hello(HttpServletRequest request) {
+		return ResponseInfo.getSuccessInstance(null);
 	}
 
 	/**
