@@ -1,13 +1,20 @@
 package com.vanke.tydirium.web.controller.admin;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,8 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSON;
@@ -28,10 +37,13 @@ import com.vanke.tydirium.entity.lebang.SysLeBangRole;
 import com.vanke.tydirium.entity.log.LogLogin;
 import com.vanke.tydirium.entity.sys.SysRole;
 import com.vanke.tydirium.entity.sys.SysUser;
+import com.vanke.tydirium.model.base.ResponseInfo;
+import com.vanke.tydirium.model.bo.LoginUser;
 import com.vanke.tydirium.service.lebang.SysLeBangRoleService;
 import com.vanke.tydirium.service.log.LogLoginService;
 import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.service.sys.SysUserService;
+import com.vanke.tydirium.tools.CryptoUtil;
 import com.vanke.tydirium.tools.HttpTool;
 import com.vanke.tydirium.web.controller.BaseController;
 
@@ -257,12 +269,10 @@ public class AdminUserController extends BaseController {
 					return "redirect:/admin/oauth/token";
 				}
 				// 记录登录成功日志
-				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(),
-						HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
+				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(), HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
 				logLoginservice.save(logLogin);
 				// 用户信息存入session
-				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY,
-						sysUserService.findByMobile(userInfoJson.getResult().getMobile()));
+				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY, sysUserService.findByMobile(userInfoJson.getResult().getMobile()));
 				request.getSession().setAttribute(ACCESSTOKEN, accessToken);
 				logger.info("登入成功：" + sysUser.getFullName());
 				return "redirect:/admin/index";
@@ -285,16 +295,9 @@ public class AdminUserController extends BaseController {
 	 * @return
 	 */
 	@AdminCheckLogin
-	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(RedirectAttributes redirectAttr, HttpServletRequest request, HttpServletResponse response) {
 		String accessToken = request.getParameter("accessToken");
-		// 清除session中的属性
-//		Enumeration em = request.getSession().getAttributeNames();
-//		while (em.hasMoreElements()) {
-//			logger.warn("remove session key : " + em.nextElement());
-//			request.getSession().removeAttribute(em.nextElement().toString());
-//		}
 		// 使session失效
 		request.getSession().invalidate();
 		// 更新登出日志
@@ -312,4 +315,89 @@ public class AdminUserController extends BaseController {
 		return "redirect:/admin/login";
 	}
 
+	/**
+	 * 校验账号密码登录
+	 * 
+	 * @param loginName
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseInfo check(@RequestBody LoginUser loginUser, HttpSession httpSession) {
+
+		// 用户名
+		String loginName = loginUser.getLoginName();
+		if (StringUtils.isBlank(loginName)) {
+			return ResponseInfo.getFailInstance("账号不能为空");
+		}
+		// 密码
+		String password = loginUser.getPassword();
+		if (StringUtils.isBlank(password)) {
+			return ResponseInfo.getFailInstance("密码不能为空");
+		}
+		// 验证码
+		String checkCode = loginUser.getCheckCode();
+		if (StringUtils.isBlank(checkCode)) {
+			return ResponseInfo.getFailInstance("验证码不能为空");
+		} else {
+			// 从session中获取验证码
+			String sessionCode = (String) httpSession.getAttribute("picCode");
+			if (!StringUtils.equalsIgnoreCase(checkCode, sessionCode)) {
+				return ResponseInfo.getFailInstance("验证码错误");
+			}
+		}
+		
+		SysUser sysUser = sysUserService.findByMobile(loginName);
+		if (sysUser == null) {
+			return ResponseInfo.getFailInstance("用户名不存在");
+		}
+		// 密码验证
+		if (!CryptoUtil.validateHash(password, sysUser.getPassword())) {
+			return ResponseInfo.getFailInstance("密码错误");
+		}
+		// 登陆成功，存储到session中
+		httpSession.setAttribute(CommonConstants.SESSION_USER_KEY, sysUser);
+		
+		return ResponseInfo.getSuccessInstance(null);
+	}
+
+	/**
+	 * 获取验证码
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/image/update", method = RequestMethod.GET)
+	public void updateImageCode(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_BGR);
+			Graphics g = bi.getGraphics();
+			Color c = new Color(250, 150, 255);
+			g.setColor(c);
+			g.fillRect(0, 0, 100, 50);
+			// 验证码字符集合
+			char[] ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+			Random r = new Random();
+			int len = ch.length;
+			int index;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < 4; ++i) {
+				index = r.nextInt(len);
+				// 设置验证码字符随机颜色
+				g.setColor(new Color(r.nextInt(88), r.nextInt(188), r.nextInt(255)));
+				// 画出对应随机的验证码字符
+				g.drawString(ch[index] + "", (i * 15) + 3, 18);
+				sb.append(ch[index]);
+			}
+			// 把验证码字符串放入Session
+			request.getSession().setAttribute("picCode", sb.toString());
+			// 在HttpServletResponse中写入验证码图片信息
+			ImageIO.write(bi, "JPG", response.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.info("生成验证码失败：" + e.toString());
+		}
+	}
 }
