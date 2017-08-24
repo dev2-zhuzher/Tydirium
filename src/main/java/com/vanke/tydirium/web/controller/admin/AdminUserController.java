@@ -266,7 +266,7 @@ public class AdminUserController extends BaseController {
 					redirectAttr.addAttribute(PROJECTCODE, projectCode);
 					redirectAttr.addAttribute(MSG, "当前角色无权登入系统");
 					// 无权进入：跳至选择项目角色页面
-					return "redirect:/admin/oauth/token";
+					return "redirect:/oauth/token";
 				}
 				// 记录登录成功日志
 				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(), HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
@@ -282,7 +282,7 @@ public class AdminUserController extends BaseController {
 			}
 		} else {
 			logger.info("获取不到accessToken 或  roleCode ！");
-			return "redirect:/login";
+			return "redirect:/admin/login";
 		}
 	}
 
