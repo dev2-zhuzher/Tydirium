@@ -26,24 +26,28 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import com.vanke.tydirium.entity.enums.Sex;
-
+/**
+ * 
+ * 
+ * @Description: 用户管理
+ *
+ * @author:  
+ * @date: 2017年8月23日 下午6:16:11
+ */
 @Entity
 @Table(name = "sys_user", uniqueConstraints = { @UniqueConstraint(columnNames = { "mobile" }) })
 public class SysUser implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4720312215559366801L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "login_name", nullable = false, length = 64)
+	@Column(name = "login_name", length = 64)
 	private String loginName;
 
-	@Column(name = "password", nullable = false, length = 64)
+	@Column(name = "password", length = 64)
 	private String password;
 
 	@Column(name = "nick_name", nullable = true, length = 20)
@@ -56,7 +60,7 @@ public class SysUser implements Serializable {
 	@Column(name = "sex", nullable = false, length = 10)
 	private Sex sex = Sex.UNKNOW;
 
-	@Column(name = "avatar_url", nullable = true, length = 100)
+	@Column(name = "avatar_url", nullable = true, length = 500)
 	private String avatarUrl;
 
 	@Column(name = "mobile", nullable = false, unique = true)
@@ -75,6 +79,15 @@ public class SysUser implements Serializable {
 
 	@Column(name = "deleted")
 	private Integer deleted = 0;
+
+	@Column(name = "identity_id")
+	private String identity_id;
+
+	@Column(name = "job_can_edit")
+	private String jobCanEdit;
+
+	@Column(name = "state")
+	private Integer state;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -197,6 +210,34 @@ public class SysUser implements Serializable {
 
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	public String getIdentityId() {
+		return identity_id;
+	}
+
+	public void setIdentityId(String identityId) {
+		this.identity_id = identityId;
+	}
+
+	public String getJobCanEdit() {
+		return jobCanEdit;
+	}
+
+	public void setJobCanEdit(String jobCanEdit) {
+		this.jobCanEdit = jobCanEdit;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }

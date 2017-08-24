@@ -11,7 +11,7 @@
 							<a href="#" target="_blank">个人信息</a>
 						</dd>
 						<dd> 
-							<a th:href="@{/logout?accessToken={accessToken}(accessToken = ${session.accessToken})}" target="_Self">退出系统</a>
+							<a th:href="@{/logout?accessToken={accessToken}(accessToken = ${session.access_token})}" target="_Self">退出系统</a>
 						</dd>
 					</dl></li>
 			</ul>

@@ -1,6 +1,5 @@
 package com.vanke.tydirium.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -11,7 +10,6 @@ import org.apache.ibatis.annotations.Select;
  * @author: songjia
  * @date: 2017年8月23日 下午2:05:07
  */
-@Mapper
 public interface SysUserMapper {
 
 	/**
