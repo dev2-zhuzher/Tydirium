@@ -35,7 +35,7 @@ public class LeBangApiRequester {
 	private String client_secret;
 	@Value("${lebang_api_host}")
 	private String lebang_api_host;
-	@Value("${redirect_url}")
+	@Value("${redirect_uri}")
 	private String lebang_redirect_uri;
 	private static final String token_uri = "/api/lebang/oauth/access_token";
 	private static final String info_url = "/api/lebang/staffs/me/detail";

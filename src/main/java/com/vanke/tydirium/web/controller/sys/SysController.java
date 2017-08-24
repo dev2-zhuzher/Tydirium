@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.vanke.tydirium.constants.CommonConstants;
 import com.vanke.tydirium.entity.sys.SysModule;
 import com.vanke.tydirium.entity.sys.SysResource;
 import com.vanke.tydirium.entity.sys.SysRole;
@@ -37,11 +38,6 @@ import com.vanke.tydirium.web.controller.BaseController;
 @RequestMapping(value = "/admin/sys")
 public class SysController extends BaseController {
 
-	public static final String PAGER = "pager";
-	/** 当前页数 */
-	public static final String PAGE = "page";
-	/** 当前页条数 */
-	public static final String SIZE = "size";
 	public static final String QUERYNICKNAME = "queryNickName";
 	public static final String QUERYMOBILE = "queryMobile";
 	public static final String ROLES = "roles";
@@ -74,7 +70,7 @@ public class SysController extends BaseController {
 		try {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysUser> pager = sysUserService.findAll(queryNickName, queryMobile, pageable);
-			model.addAttribute(PAGER, pager);
+			model.addAttribute(CommonConstants.PAGER, pager);
 			model.addAttribute(QUERYNICKNAME, queryNickName);
 			model.addAttribute(QUERYMOBILE, queryMobile);
 			return "sys/user/list";
@@ -142,7 +138,7 @@ public class SysController extends BaseController {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysRole> pager = sysRoleService.findAll(queryRoleName, pageable);
 			model.addAttribute(QUERYROLENAME, queryRoleName);
-			model.addAttribute(PAGER, pager);
+			model.addAttribute(CommonConstants.PAGER, pager);
 			return "/sys/role/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
@@ -189,7 +185,7 @@ public class SysController extends BaseController {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysModule> pager = sysModuleService.findAll(queryModuleName, pageable);
 			model.addAttribute(QUERYMODULENAME, queryModuleName);
-			model.addAttribute(PAGER, pager);
+			model.addAttribute(CommonConstants.PAGER, pager);
 			return "/sys/module/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");
@@ -246,7 +242,7 @@ public class SysController extends BaseController {
 			Pageable pageable = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
 			Page<SysResource> pager = sysResourceService.findAll(queryResourcesName, pageable);
 			model.addAttribute(QUERYRESOURCESNAME, queryResourcesName);
-			model.addAttribute(PAGER, pager);
+			model.addAttribute(CommonConstants.PAGER, pager);
 			return "/sys/resource/list";
 		} catch (Exception e) {
 			throw new WebException(e, "", "");

@@ -1,0 +1,54 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>后台管理系统</title>
+<!-- layui.css -->
+<link href="/plugin/layui/css/layui.css" rel="stylesheet" />
+<!-- 本页样式 -->
+<link href="/css/project.css" rel="stylesheet" />
+</head>
+<body class="layui-bg-black">
+	<form class="layui-form project-form" action="/oauth/login"
+		method="post">
+		<div class="project-welcome">
+			<p>
+				<span th:text="${nickname}"></span> &nbsp; &nbsp;欢迎您登陆快递收发系统！
+			</p>
+			<p class="project-please">请选择您拥有的项目角色：</p>
+		</div>
+		<div class="project-chose" lay-verify="checkProjectRole">
+			<ul>
+				<li th:each="pro , proStat : ${projectAndRole}">
+					<blockquote class="layui-elem-quote">
+						项目：<span th:text="${pro.project}"></span> , 角色： <input
+							type="radio" name="roleCode" th:value="${pro.role_code}"
+							th:title="${pro.role}" th:projectcode="${pro.project_code}"
+							th:if="${projectCode == pro.project_code && roleCode == pro.role_code}"
+							checked> <input type="radio" name="roleCode"
+							th:value="${pro.role_code}" th:title="${pro.role}"
+							th:projectcode="${pro.project_code}"
+							th:unless="${projectCode == pro.project_code && roleCode == pro.role_code}">
+					</blockquote>
+				</li>
+			</ul>
+		</div>
+		<div class="project-login">
+			<input type="hidden" name="projectCode"> <input
+				type="hidden" name="description"> <input type="hidden"
+				name="code" th:value="${code}"> <input type="hidden"
+				name="access_token" th:value="${access_token}"> <a
+				class="layui-btn layui-btn-primary" href="/auto/login">返回</a> <input
+				class="layui-btn layui-btn-primary" type="submit" value="登陆"
+				lay-submit="" lay-filter="project">
+			<div class="project-error" th:text="${msg}"></div>
+		</div>
+	</form>
+	<script src="/plugin/layui/layui.js"></script>
+	<!-- layui规范化用法 -->
+	<script type="text/javascript">
+		layui.config({
+			base : '/js/'
+		}).use('project');
+	</script>
+</body>
+</html>

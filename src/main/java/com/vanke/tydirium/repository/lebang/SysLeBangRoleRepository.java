@@ -14,7 +14,6 @@ public interface SysLeBangRoleRepository
 		extends JpaRepository<SysLeBangRole, Serializable>, JpaSpecificationExecutor<SysLeBangRole> {
 
 	Set<SysRole> findByIdIn(Collection<Long> roleIds);
-	
 	SysLeBangRole findByLeBangRoleCode(String leBangRoleCode);
 
 }
