@@ -8,8 +8,8 @@
 <link href="/css/login.css" rel="stylesheet" />
 </head>
 <body>  
-		<div id="login" style="display:none;">
-			<form class="layui-form" action="/admin/dologin" method="post">
+		<div id="login" style="display:none;height: 330px">
+			<form class="layui-form" action="">
 				<div class="layui-form-item" >
 					<fieldset class="layui-elem-field layui-field-title">
                         <legend>后台登陆</legend>
@@ -20,7 +20,7 @@
 					<label class="layui-form-label">账号</label>
 					<div class="layui-input-inline pm-login-input">
 						<input type="text" name="account" lay-verify="account"
-							placeholder="请输入账号"  autocomplete="off"
+							placeholder="请输入账号" value="10015454" autocomplete="off"
 							class="layui-input">
 					</div>
 				</div>
@@ -28,22 +28,25 @@
 					<label class="layui-form-label">密码</label>
 					<div class="layui-input-inline pm-login-input">
 						<input type="password" name="password" lay-verify="passWord"
-							placeholder="请输入密码"  autocomplete="off"
+							placeholder="请输入密码" value="123456" autocomplete="off"
 							class="layui-input">
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">人机验证</label>
+					<label class="layui-form-label">验证</label>
 					<div class="layui-input-inline pm-login-input">
-						<input type="text" name="result_response" placeholder="人机验证"
-							value="" autocomplete="off" class="layui-input">
+						<input type="text" name="checkcode" placeholder="请输入验证码"
+							value="" autocomplete="off" class="layui-input check-code">
+					</div>
+					<div class="img">
+						<img alt="验证码" id="imagecode" src="/admin/imgCheck" class="img-code" onclick="reloadCode()"/>
 					</div>
 				</div>
 				<div class="layui-form-item"
 					style="margin-top: 25px; margin-bottom: 0;">
 					<div class="layui-input-block">
 						<input class="layui-btn" style="width: 133px;" lay-submit=""
-							lay-filter="login" type="submit" value="立即登录"/> 
+							lay-filter="login" value="立即登录"/> 
 						<a class="layui-btn" style="width: 133px;" href="/auto/login">使用住这儿账号</a>
 					</div>
 				</div>
@@ -56,6 +59,11 @@
 		layui.config({
 			base : '/js/'
 		}).use('login');
+		//刷新验证码
+		function reloadCode() {
+            var time = new Date().getTime();
+            document.getElementById("imagecode").src = "/admin/imgCheck?d=" + time;
+        }
 	</script>
 </body>
 </html>

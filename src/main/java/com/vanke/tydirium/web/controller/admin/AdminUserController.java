@@ -1,12 +1,18 @@
 package com.vanke.tydirium.web.controller.admin;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSON;
@@ -45,6 +53,7 @@ import com.vanke.tydirium.web.controller.BaseController;
  * @date: 2017年8月24日 上午10:08:55
  */
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminUserController extends BaseController {
 
 	public static final String ACCESSTOKEN = "access_token";
@@ -130,27 +139,6 @@ public class AdminUserController extends BaseController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
-	}
-
-	/**
-	 * 本地登陆（非oauth登陆）
-	 * 
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
-	public String login(Model model, HttpServletRequest request, HttpServletResponse response) {
-
-		String account = request.getParameter("account");
-
-		SysUser sysUser = sysUserService.findByMobile(account);
-
-		request.getSession().setAttribute("user", sysUser);
-
-		// 登陆成功，跳转到首页
-		return "main";
 	}
 
 	/**
@@ -369,4 +357,73 @@ public class AdminUserController extends BaseController {
 		return "redirect:/login";
 	}
 
+	/**
+	 * 校验账号密码登录
+	 * 
+	 * @param loginName
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/check")
+	@ResponseBody
+	public Object check(@RequestParam("loginName") String loginName, @RequestParam("password") String password,@RequestParam("checkcode") String checkcode,
+			HttpServletRequest request,HttpServletResponse response) {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			SysUser sysUser = sysUserService.findByCheck(loginName, password);
+			if (sysUser != null) {
+				//校验用户输入的验证码是否正确
+				String piccode=(String)request.getSession().getAttribute("piccode");
+				response.setContentType("text/html;charset=gbk");
+				if(checkcode.equalsIgnoreCase(piccode)){
+					request.getSession().setAttribute("user", sysUser);
+					jsonObject.put("flag", "success");
+				}else{
+					jsonObject.put("flag", "imgErrer");
+				}
+			}
+		} catch (Exception e) {
+			jsonObject.put("flag", "error");
+			e.printStackTrace();
+		}
+		return jsonObject;
+	}
+
+	/**
+	 * 获取验证码
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "imgCheck")
+	public void imgCheck(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_BGR);
+			Graphics g = bi.getGraphics();
+			Color c = new Color(250, 150, 255);
+			g.setColor(c);
+			g.fillRect(0, 0, 100, 50);
+			// 验证码字符集合
+			char[] ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+			Random r = new Random();
+			int len = ch.length;
+			int index;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < 4; ++i) {
+				index = r.nextInt(len);
+				// 设置验证码字符随机颜色
+				g.setColor(new Color(r.nextInt(88), r.nextInt(188), r.nextInt(255)));
+				// 画出对应随机的验证码字符
+				g.drawString(ch[index] + "", (i * 15) + 3, 18);
+				sb.append(ch[index]);
+			}
+			// 把验证码字符串放入Session
+			request.getSession().setAttribute("piccode", sb.toString());
+			// 在HttpServletResponse中写入验证码图片信息
+			ImageIO.write(bi, "JPG", response.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

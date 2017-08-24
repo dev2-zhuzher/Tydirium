@@ -26,4 +26,6 @@ public interface SysUserService {
 	 */
 	Page<SysUser> findAll(String name, String mobile, Pageable pageable);
 
+	SysUser findByCheck(String account, String password) throws Exception;
+
 }

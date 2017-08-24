@@ -67,6 +67,15 @@ public class SysUserServiceImpl implements SysUserService {
 	public void delete(Long userId) {
 		sysUserRepository.delete(userId);
 	}
+	
+	@Override
+	public SysUser findByCheck(String account, String password) throws Exception {
+		SysUser sysUser = sysUserRepository.findByCheck(account, password);
+		if(sysUser == null){
+			throw new Exception("账号或密码错误");
+		}
+		return sysUser;
+	}
 
 
 }
