@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vanke.tydirium.constants.CommonConstants;
 import com.vanke.tydirium.entity.sys.SysModule;
 import com.vanke.tydirium.entity.sys.SysResource;
 import com.vanke.tydirium.entity.sys.SysRole;
@@ -32,6 +31,7 @@ import com.vanke.tydirium.service.sys.SysModuleService;
 import com.vanke.tydirium.service.sys.SysResourceService;
 import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.service.sys.SysUserService;
+import com.vanke.tydirium.tools.CommonConstants;
 import com.vanke.tydirium.web.controller.BaseController;
 
 /**

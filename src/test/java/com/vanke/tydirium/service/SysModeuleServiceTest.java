@@ -20,7 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.vanke.tydirium.entity.sys.SysModule;
-import com.vanke.tydirium.entity.sys.SysResource;
 import com.vanke.tydirium.service.sys.SysModuleService;
 
 
