@@ -46,6 +46,8 @@ public class ParcelServiceImpl implements ParcelService {
 
 		return ResponseInfo.getSuccessInstance(null);
 	}
+	
+	
 
 	/**
 	 * 获取物品类型集合

@@ -2,8 +2,6 @@ package com.vanke.tydirium.model.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-
 /**
  * 
  * 
@@ -16,8 +14,10 @@ public class Parcel implements Serializable {
 
 	private static final long serialVersionUID = 400543535688891645L;
 
+	// 邮包ID
+	private Long parcelId;
+
 	// 项目code
-	@Column
 	private String projectCode;
 
 	// 项目名称
@@ -49,6 +49,14 @@ public class Parcel implements Serializable {
 
 	// 实际取件人手机号
 	private String fetchMobile;
+
+	public Long getParcelId() {
+		return parcelId;
+	}
+
+	public void setParcelId(Long parcelId) {
+		this.parcelId = parcelId;
+	}
 
 	public String getProjectCode() {
 		return projectCode;
