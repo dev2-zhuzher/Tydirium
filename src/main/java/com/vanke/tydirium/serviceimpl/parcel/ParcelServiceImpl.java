@@ -71,7 +71,7 @@ public class ParcelServiceImpl implements ParcelService {
 
 		// 生成取件码
 
-		// 根据手机号码查询houseCode
+		// 根据手机号码查询houseCode[不是注册用户则为空]
 
 		// 数据库插入邮包记录
 
@@ -126,6 +126,7 @@ public class ParcelServiceImpl implements ParcelService {
 
 		// 存储到缓存中
 		this.redisCacheUtil.setList(RedisKeyCommonUtil.PROJECT_PICKUP_POSITION_KEY.replace("${projectCode}", projectCode), result);
+		
 		return result;
 	}
 
@@ -150,11 +151,21 @@ public class ParcelServiceImpl implements ParcelService {
 	 */
 	@Override
 	public ResponseInfo addRemark(ParcelRemark remark) {
-		// 参数判断
-		
-		// TODO
-
 		// 判断邮包状态
+		Integer status = this.parcelMapper.queryParcelStatus(remark.getParcelId());
+		if (status == null || status.equals(Integer.valueOf(2))) {
+			return ResponseInfo.getFailInstance("邮包不存在或邮包状态非法");
+		}
+		// 备注内容判断
+		if (StringUtils.isBlank(remark.getRemark())) {
+			return ResponseInfo.getFailInstance("备注内容不能为空");
+		}
+		
+		// 填充备注人手机号码
+		remark.setMobile(UserThreadLocal.getCurrUser().getMobile());
+		
+		// 插入备注记录 TODO
+
 		return ResponseInfo.getSuccessInstance();
 	}
 
@@ -179,7 +190,11 @@ public class ParcelServiceImpl implements ParcelService {
 			return ResponseInfo.getFailInstance("取件人手机不能为空");
 		}
 		
-		// TODO
+		// 取件更新邮包状态
+		int row = this.parcelMapper.updateParcelStatus(parcleId, mobile);
+		if (row == 0) {
+			return ResponseInfo.getFailInstance("系统异常，请稍后重试");
+		}
 		
 		return ResponseInfo.getSuccessInstance();
 	}
