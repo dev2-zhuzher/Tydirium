@@ -10,7 +10,9 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.vanke.tydirium.annotation.AdminCheckLogin;
-import com.vanke.tydirium.constants.CommonConstants;
+import com.vanke.tydirium.entity.sys.SysUser;
+import com.vanke.tydirium.model.base.UserThreadLocal;
+import com.vanke.tydirium.tools.CommonConstants;
 
 /**
  * 
@@ -77,12 +79,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	 * @throws IOException
 	 */
 	private boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		UserThreadLocal.removeCurrUser();
+		
+		SysUser sysUser = (SysUser) request.getSession().getAttribute(CommonConstants.SESSION_USER_KEY);
+		
 		// 获取用户信息session
-		if (request.getSession().getAttribute(CommonConstants.SESSION_USER_KEY) == null) {
+		if (sysUser == null) {
 			// 重定向至登录页
 			response.sendRedirect("/admin/login");
 			return false;
 		}
+		
+		UserThreadLocal.setCurrUser(sysUser);
 		return true;
 	}
 

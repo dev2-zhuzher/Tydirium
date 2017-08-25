@@ -1,4 +1,4 @@
-package com.vanke.tydirium.constants;
+package com.vanke.tydirium.tools;
 
 /**
  * 

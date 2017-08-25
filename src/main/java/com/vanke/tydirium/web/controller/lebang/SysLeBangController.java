@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vanke.tydirium.constants.CommonConstants;
 import com.vanke.tydirium.entity.lebang.SysLeBangRole;
 import com.vanke.tydirium.entity.sys.SysRole;
 import com.vanke.tydirium.service.lebang.SysLeBangRoleService;
 import com.vanke.tydirium.service.sys.SysRoleService;
+import com.vanke.tydirium.tools.CommonConstants;
 import com.vanke.tydirium.web.controller.BaseController;
 
 /**
