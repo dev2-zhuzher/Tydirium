@@ -1,4 +1,4 @@
-package com.vanke.tydirium.service.sys;
+package com.vanke.tydirium.service.Logistics;
 
 import com.vanke.tydirium.entity.enums.ShipperCodeEnum;
 import com.vanke.tydirium.model.base.ResponseInfo;

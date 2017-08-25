@@ -17,8 +17,8 @@ import com.vanke.tydirium.constants.CommonConstants;
  * 
  * @Description: 登陆拦截器
  *
- * @author: vanke-yuzn05
- * @date: 2017年8月24日 上午9:36:06
+ * @author: songjia
+ * @date: 2017年8月24日 下午7:53:44
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -38,9 +38,30 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
+//			HandlerMethod method = (HandlerMethod) handler;
+//			
+//			// 获取类上面的AdminCheckLogin注解
+//			AdminCheckLogin clazzAuth = method.getClass().getAnnotation(AdminCheckLogin.class);
+//			
+//			// 获取方法上的AdminCheckLogin注解
+//			AdminCheckLogin methodAuth = method.getMethodAnnotation(AdminCheckLogin.class);
+//
+//			// 首先判断类上有没有该注解
+//			if (clazzAuth != null) {
+//				// 如果方法上加了AdminCheckLogin注解，并且needCheck设置为flase，则不拦截
+//				if (methodAuth != null && !methodAuth.needCheck()) {
+//					return true;
+//				}
+//			} else {
+//				// 类上没有加注解，方法上加了AdminCheckLogin，并且needCheck设置为true，则拦截
+//				if (methodAuth != null && methodAuth.needCheck()) {
+//					return this.checkLogin(request, response);
+//				}
+//			}
+			
 			// 判断目标接口上是否有AdminCheckLogin注解，有则验证登陆
 			AdminCheckLogin adminCheckLogin = ((HandlerMethod) handler).getMethodAnnotation(AdminCheckLogin.class);
-			if (adminCheckLogin != null && adminCheckLogin.needCheck()) {
+			if (adminCheckLogin == null || adminCheckLogin.needCheck()) {
 				return this.checkLogin(request, response);
 			}
 		}

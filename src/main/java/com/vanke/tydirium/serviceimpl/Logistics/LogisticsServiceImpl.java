@@ -1,4 +1,4 @@
-package com.vanke.tydirium.serviceimpl.sys;
+package com.vanke.tydirium.serviceimpl.Logistics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.vanke.tydirium.entity.enums.ShipperCodeEnum;
 import com.vanke.tydirium.model.base.ResponseInfo;
 import com.vanke.tydirium.model.bo.LogisticsInfo;
-import com.vanke.tydirium.service.sys.LogisticsService;
+import com.vanke.tydirium.service.Logistics.LogisticsService;
 import com.vanke.tydirium.tools.HttpTool;
 
 /**
