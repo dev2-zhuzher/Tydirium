@@ -12,7 +12,7 @@ import com.vanke.tydirium.entity.enums.ShipperCodeEnum;
 import com.vanke.tydirium.model.base.ResponseInfo;
 import com.vanke.tydirium.model.bo.LogisticsInfo;
 import com.vanke.tydirium.model.bo.LogisticsInfo.TracesInfo;
-import com.vanke.tydirium.service.Logistics.LogisticsService;
+import com.vanke.tydirium.service.parcel.LogisticsService;
 
 /**
  * 
