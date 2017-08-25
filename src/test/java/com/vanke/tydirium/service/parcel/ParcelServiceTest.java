@@ -1,6 +1,7 @@
 package com.vanke.tydirium.service.parcel;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,20 @@ public class ParcelServiceTest extends BaseTest {
 		List<ItemType> list = this.parcelService.queryItemTypeList();
 		for (ItemType itemType : list) {
 			System.out.println(JSONObject.toJSONString(itemType));
+		}
+	}
+	
+	
+	
+	/**
+	 * 查询当前项目取件位置列表测试
+	 */
+	@Test
+	public void queryCurrentPickupList() {
+		List<Map<Long, Object>> list = this.parcelService.getCurrentPickupList();
+		for (Map<Long, Object> map : list) {
+			System.out.println(map.get("id"));
+			System.out.println(map.get("position"));
 		}
 	}
 }

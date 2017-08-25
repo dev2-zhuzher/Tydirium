@@ -12,4 +12,7 @@ public class RedisKeyCommonUtil {
 	
 	// 物品类型列表缓存key
 	public static final String ITEM_TYPE_LIST_KEY = "tydirium:item_type_list";
+	
+	// 项目取件位置缓存key
+	public static final String PROJECT_PICKUP_POSITION_KEY = "tydirium:pickup_position_${projectCode}";
 }
