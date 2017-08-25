@@ -3,7 +3,7 @@
  */
 
 layui.define(['element', 'layer', 'form'], function (exports) {
-    var form = layui.form();
+    var form = layui.form;
     var $ = layui.jquery;
     //自定义验证
     form.verify({
@@ -69,7 +69,6 @@ layui.define(['element', 'layer', 'form'], function (exports) {
             skin: 'pm-layer-login',
             content: loginHtml
         });
-        layui.form().render('checkbox');
     }
     login();
     

@@ -19,7 +19,7 @@
 		<div class="project-chose" lay-verify="checkProjectRole">
 			<ul>
 				<li th:each="pro , proStat : ${projectAndRole}">
-					<blockquote class="layui-elem-quote">
+					<blockquote class="layui-elem-quote site-text">
 						项目：<span th:text="${pro.project}"></span> , 角色： <input
 							type="radio" name="roleCode" th:value="${pro.role_code}"
 							th:title="${pro.role}" th:projectcode="${pro.project_code}"
