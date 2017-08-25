@@ -22,18 +22,19 @@
 					<blockquote class="layui-elem-quote site-text">
 						项目：<span th:text="${pro.project}"></span> , 角色： <input
 							type="radio" name="roleCode" th:value="${pro.role_code}"
-							th:title="${pro.role}" th:projectcode="${pro.project_code}"
+							th:title="${pro.role}" th:projectCode="${pro.project_code}" th:projectName="${pro.project}"
 							th:if="${projectCode == pro.project_code && roleCode == pro.role_code}"
-							checked> <input type="radio" name="roleCode"
+							checked> 
+							<input type="radio" name="roleCode"
 							th:value="${pro.role_code}" th:title="${pro.role}"
-							th:projectcode="${pro.project_code}"
+							th:projectcode="${pro.project_code}" th:projectName="${pro.project}"
 							th:unless="${projectCode == pro.project_code && roleCode == pro.role_code}">
 					</blockquote>
 				</li>
 			</ul>
 		</div>
 		<div class="project-login">
-			<input type="hidden" name="projectCode"> <input
+			<input type="hidden" name="projectCode"> <input type="hidden" name="projectName"> <input
 				type="hidden" name="description"> <input type="hidden"
 				name="code" th:value="${code}"> <input type="hidden"
 				name="access_token" th:value="${access_token}"> <a
