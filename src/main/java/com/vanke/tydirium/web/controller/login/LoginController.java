@@ -77,6 +77,8 @@ public class LoginController extends BaseController {
 
 	public static final String PROJECTCODE = "projectCode";
 
+	public static final String PROJECTNAME = "projectName";
+
 	public final static String TOKEN = "token";
 
 	public final static String NEXTURL = "next_url";
@@ -221,7 +223,11 @@ public class LoginController extends BaseController {
 		logger.info("当前登陆用户accessToken:" + accessToken);
 		String roleCode = request.getParameter(ROLECODE);
 		logger.info("当前登陆用户roleCode:" + roleCode);
+		// 项目代码
 		String projectCode = request.getParameter(PROJECTCODE);
+		// 项目名称
+		String projectName = request.getParameter(PROJECTNAME);
+		// 角色描述
 		String description = request.getParameter(DESCRIPTION);
 		if (StringUtils.isNotEmpty(accessToken) && StringUtils.isNotEmpty(roleCode)) {
 			try {
@@ -274,8 +280,11 @@ public class LoginController extends BaseController {
 				// 记录登录成功日志
 				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(), HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
 				logLoginservice.saveLoginLog(logLogin);
+				sysUser = sysUserService.findByMobile(userInfoJson.getResult().getMobile());
+				sysUser.setProjectCode(projectCode);
+				sysUser.setProjectName(projectName);
 				// 用户信息存入session
-				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY, sysUserService.findByMobile(userInfoJson.getResult().getMobile()));
+				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY, sysUser);
 				request.getSession().setAttribute(ACCESSTOKEN, accessToken);
 				logger.info("登入成功：" + sysUser.getFullName());
 				return "redirect:/admin/index";

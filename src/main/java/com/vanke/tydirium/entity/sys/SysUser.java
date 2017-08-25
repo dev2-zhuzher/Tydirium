@@ -23,15 +23,17 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import com.vanke.tydirium.entity.enums.Sex;
+
 /**
  * 
  * 
  * @Description: 用户管理
  *
- * @author:  
+ * @author:
  * @date: 2017年8月23日 下午6:16:11
  */
 @Entity
@@ -93,6 +95,14 @@ public class SysUser implements Serializable {
 	@JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@OrderBy("id desc")
 	private Set<SysRole> roles = new LinkedHashSet<SysRole>();// 用户关联的角色
+
+	// 项目代码
+	@Transient
+	private String projectCode;
+
+	// 项目名称
+	@Transient
+	private String projectName;
 
 	/**
 	 * 将设置创建时间的动作交个jpa处理,减少业务层面的重复的代码
@@ -238,6 +248,22 @@ public class SysUser implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 }

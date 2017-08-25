@@ -12,7 +12,8 @@ layui.define([ 'element', 'layer', 'form' ], function(exports) {
 			if(checkRole.length == 0){
 				return "登陆角色必选";
 			}
-			$("input[name='projectCode']").val(checkRole.prev().attr("projectcode"));
+			$("input[name='projectCode']").val(checkRole.prev().attr("projectCode"));
+			$("input[name='projectName']").val(checkRole.prev().attr("projectName"));
 			$("input[name='description']").val(checkRole.prev().attr("title"));
 		}
 	});
