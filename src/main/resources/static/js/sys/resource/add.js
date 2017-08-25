@@ -4,7 +4,7 @@
 $(function() {
 	// 加载控件
 	layui .use( [ 'element','form', 'layedit', 'laydate' ], function() {
-		var form = layui.form(), layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
+		var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
  
 		// 自定义验证规则
 		form.verify({ 

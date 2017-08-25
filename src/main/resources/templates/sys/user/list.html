@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-<blockquote class="layui-elem-quote">
+<blockquote class="layui-elem-quote site-text">
   <span class="layui-breadcrumb"> 
 		<a href="">首页</a> 
 		<a href="">权限管理</a>
@@ -19,6 +19,7 @@
 	<form class="layui-form" id="from" action="/admin/sys/users">
 		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
 		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
+		<input type="hidden" name="totalElements" id="totalElements" th:value="${pager.totalElements}"/> 
 		  <div class="layui-inline">
 		    <label class="layui-form-label">用户昵称</label>
 		    <div class="layui-input-block">
