@@ -110,4 +110,8 @@ public class ResponseInfo implements Serializable {
 	public static ResponseInfo getSuccessInstance(Object result) {
 		return new ResponseInfo(ResponseInfo.SUCCESS, result);
 	}
+	
+	public static ResponseInfo getSuccessInstance() {
+		return new ResponseInfo(ResponseInfo.SUCCESS);
+	}
 }

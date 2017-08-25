@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author: songjia
  * @date: 2017年8月25日 上午11:38:08
  */
-public class Parcel implements Serializable {
+public class ParcelBase implements Serializable {
 
 	private static final long serialVersionUID = 400543535688891645L;
 

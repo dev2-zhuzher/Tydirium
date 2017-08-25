@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class ItemType implements Serializable {
 
-	private static final long serialVersionUID = 1528222540666190475L;
+	private static final long serialVersionUID = 2041383116653106084L;
 
 	// 物品类型ID
 	private Long itemId;
