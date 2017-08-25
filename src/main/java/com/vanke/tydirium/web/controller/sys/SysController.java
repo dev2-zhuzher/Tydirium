@@ -34,6 +34,14 @@ import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.service.sys.SysUserService;
 import com.vanke.tydirium.web.controller.BaseController;
 
+/**
+ * 
+ * 
+ * @Description: 后台用户Controller
+ *
+ * @author: songjia 
+ * @date: 2017年8月25日 上午9:32:07
+ */
 @Controller
 @RequestMapping(value = "/admin/sys")
 public class SysController extends BaseController {

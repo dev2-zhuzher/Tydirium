@@ -21,12 +21,13 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 	 * 注册拦截器
 	 * 
 	 * @param registry
-	 * 
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
 	 */
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// 登陆拦截器
-		registry.addInterceptor(
-				new LoginInterceptor())/* .addPathPatterns("/admin/**") */;
+		// 登录拦截器
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**");
+		super.addInterceptors(registry);
 	}
 
 }

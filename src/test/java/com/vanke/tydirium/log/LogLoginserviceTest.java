@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.vanke.tydirium.entity.log.LogLogin;
-import com.vanke.tydirium.service.log.LogLoginService;
+import com.vanke.tydirium.service.log.LogService;
+
 /**
  * 
  * 
@@ -28,10 +29,10 @@ import com.vanke.tydirium.service.log.LogLoginService;
 public class LogLoginserviceTest {
 
 	@Autowired
-	private LogLoginService logLoginService;
-	
+	private LogService logService;
+
 	private String sessionId = "dceaf2c6-431e-4297-9985-d068e1ba5468";
-	
+
 	@Before
 	public void setUp() throws Exception {
 		LogLogin login = new LogLogin();
@@ -41,15 +42,16 @@ public class LogLoginserviceTest {
 		login.setLoginTime(new Date());
 		login.setSuccessful(Boolean.TRUE);
 		login.setSessionId(sessionId);
-		logLoginService.save(login);
+		logService.saveLoginLog(login);
 	}
+
 	/**
 	 * 根据sessionId查询登陆日志
 	 */
 	@Test
-	public void findLogLoginBySessionIdTest(){
-		LogLogin login = logLoginService.findLogLoginBySessionId(sessionId);
+	public void findLogLoginBySessionIdTest() {
+		LogLogin login = logService.findLogLoginBySessionId(sessionId);
 		assertNotNull(login);
 	}
-	
+
 }

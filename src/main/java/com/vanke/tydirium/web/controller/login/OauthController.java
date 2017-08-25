@@ -1,4 +1,4 @@
-package com.vanke.tydirium.web.controller.admin;
+package com.vanke.tydirium.web.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.vanke.tydirium.annotation.AdminCheckLogin;
 import com.vanke.tydirium.configuration.LeBangApiRequester;
 import com.vanke.tydirium.web.controller.BaseController;
 
@@ -26,7 +27,7 @@ import com.vanke.tydirium.web.controller.BaseController;
  */
 @Controller
 @RequestMapping("/oauth")
-public class AdminOauthController extends BaseController {
+public class OauthController extends BaseController {
 
 	public static final String ACCESSTOKEN = "access_token";
 
@@ -51,6 +52,7 @@ public class AdminOauthController extends BaseController {
 	 * @param response
 	 * @return
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/token", method = RequestMethod.GET)
 	public String oauth(Model model, HttpServletRequest request, HttpServletResponse response) {
 		// 获取code

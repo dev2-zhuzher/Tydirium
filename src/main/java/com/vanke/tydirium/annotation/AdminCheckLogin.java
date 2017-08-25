@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AdminCheckLogin {
-	// 是否需要验证登陆，默认为true，标识需要
-	boolean needCheck() default true;
+	// 是否需要验证登陆，默认为false【false表示不拦截】
+	boolean needCheck() default false;
 }

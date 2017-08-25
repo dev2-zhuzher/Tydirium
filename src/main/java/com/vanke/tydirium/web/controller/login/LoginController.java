@@ -1,4 +1,4 @@
-package com.vanke.tydirium.web.controller.admin;
+package com.vanke.tydirium.web.controller.login;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -40,7 +40,7 @@ import com.vanke.tydirium.entity.sys.SysUser;
 import com.vanke.tydirium.model.base.ResponseInfo;
 import com.vanke.tydirium.model.bo.LoginUser;
 import com.vanke.tydirium.service.lebang.SysLeBangRoleService;
-import com.vanke.tydirium.service.log.LogLoginService;
+import com.vanke.tydirium.service.log.LogService;
 import com.vanke.tydirium.service.sys.SysRoleService;
 import com.vanke.tydirium.service.sys.SysUserService;
 import com.vanke.tydirium.tools.CryptoUtil;
@@ -57,7 +57,7 @@ import com.vanke.tydirium.web.controller.BaseController;
  */
 @Controller
 @RequestMapping(value = "/admin")
-public class AdminUserController extends BaseController {
+public class LoginController extends BaseController {
 
 	public static final String ACCESSTOKEN = "access_token";
 
@@ -90,7 +90,7 @@ public class AdminUserController extends BaseController {
 	private String redirectUriLogin;
 
 	@Autowired
-	private LogLoginService logLoginService;
+	private LogService logService;
 
 	/** 鉴权服务地址 */
 	@Value("${lebang_api_host_oauth}")
@@ -130,7 +130,7 @@ public class AdminUserController extends BaseController {
 	LeBangApiRequester leBangApiRequester;
 
 	@Autowired
-	private LogLoginService logLoginservice;
+	private LogService logLoginservice;
 
 	/**
 	 * 跳转至登陆页面
@@ -138,6 +138,7 @@ public class AdminUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@AdminCheckLogin
 	public String login(HttpServletRequest request) {
 		SysUser user = (SysUser) request.getSession().getAttribute(CommonConstants.SESSION_USER_KEY);
 		// 判断是否已登陆
@@ -155,6 +156,7 @@ public class AdminUserController extends BaseController {
 	 * @param response
 	 * @return
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request, HttpServletResponse response) {
 
@@ -173,7 +175,6 @@ public class AdminUserController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@AdminCheckLogin
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String toIndex() {
 		return "index";
@@ -188,6 +189,7 @@ public class AdminUserController extends BaseController {
 	 * @param response
 	 * @return
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/auto/login", method = RequestMethod.GET)
 	public String autoLogin(RedirectAttributes attr) {
 		// attr会代入url作为参数
@@ -210,6 +212,7 @@ public class AdminUserController extends BaseController {
 	 * @param response
 	 * @return
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/oauth/login", method = RequestMethod.POST)
 	public String oauthLogin(Model model, RedirectAttributes redirectAttr, HttpServletRequest request) {
 		String code = request.getParameter(CODE);
@@ -270,7 +273,7 @@ public class AdminUserController extends BaseController {
 				}
 				// 记录登录成功日志
 				LogLogin logLogin = new LogLogin(sysUser.getMobile(), Boolean.TRUE, new Date(), HttpTool.getRequestIp(request), "登录成功", request.getSession().getId());
-				logLoginservice.save(logLogin);
+				logLoginservice.saveLoginLog(logLogin);
 				// 用户信息存入session
 				request.getSession().setAttribute(CommonConstants.SESSION_USER_KEY, sysUserService.findByMobile(userInfoJson.getResult().getMobile()));
 				request.getSession().setAttribute(ACCESSTOKEN, accessToken);
@@ -294,17 +297,16 @@ public class AdminUserController extends BaseController {
 	 * @param response
 	 * @return
 	 */
-	@AdminCheckLogin
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(RedirectAttributes redirectAttr, HttpServletRequest request, HttpServletResponse response) {
 		String accessToken = request.getParameter("accessToken");
 		// 使session失效
 		request.getSession().invalidate();
 		// 更新登出日志
-		LogLogin login = logLoginService.findLogLoginBySessionId(request.getSession().getId());
+		LogLogin login = logService.findLogLoginBySessionId(request.getSession().getId());
 		if (login != null) {
 			login.setLogoutTime(new Date());
-			logLoginService.save(login);
+			logService.saveLoginLog(login);
 		}
 		// 跳转回住这儿登录页
 		if (StringUtils.isNotEmpty(accessToken)) {
@@ -323,6 +325,7 @@ public class AdminUserController extends BaseController {
 	 * @param request
 	 * @return
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseInfo check(@RequestBody LoginUser loginUser, HttpSession httpSession) {
@@ -348,7 +351,7 @@ public class AdminUserController extends BaseController {
 				return ResponseInfo.getFailInstance("验证码错误");
 			}
 		}
-		
+
 		SysUser sysUser = sysUserService.findByMobile(loginName);
 		if (sysUser == null) {
 			return ResponseInfo.getFailInstance("用户名不存在");
@@ -359,7 +362,7 @@ public class AdminUserController extends BaseController {
 		}
 		// 登陆成功，存储到session中
 		httpSession.setAttribute(CommonConstants.SESSION_USER_KEY, sysUser);
-		
+
 		return ResponseInfo.getSuccessInstance(null);
 	}
 
@@ -369,6 +372,7 @@ public class AdminUserController extends BaseController {
 	 * @param request
 	 * @param response
 	 */
+	@AdminCheckLogin
 	@RequestMapping(value = "/image/update", method = RequestMethod.GET)
 	public void updateImageCode(HttpServletRequest request, HttpServletResponse response) {
 		try {
