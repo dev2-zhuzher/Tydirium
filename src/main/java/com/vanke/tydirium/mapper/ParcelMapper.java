@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.vanke.tydirium.model.dto.ItemType;
 import com.vanke.tydirium.model.dto.ParcelDetail;
@@ -49,5 +50,24 @@ public interface ParcelMapper {
 	 * @return
 	 */
 	public ParcelDetail getParcelDetail(Long parceId);
+
+	/**
+	 * 取件更新邮包记录状态
+	 * 
+	 * @param parcleId
+	 * @param mobile
+	 * @return
+	 */
+	@Update("update t_parcel set status = 2, pickup_mobile = #{1}, pickup_time = now() where id = #{0} status = 1")
+	int updateParcelStatus(Long parcleId, String mobile);
+
+	/**
+	 * 根据邮包ID查询邮包状态
+	 * 
+	 * @param parcelId
+	 * @return
+	 */
+	@Select("select status from t_parcel where id = #{0}")
+	Integer queryParcelStatus(Long parcelId);
 
 }
