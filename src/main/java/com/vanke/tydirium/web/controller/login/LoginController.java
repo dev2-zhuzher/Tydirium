@@ -404,6 +404,9 @@ public class LoginController extends BaseController {
 				g.drawString(ch[index] + "", (i * 15) + 3, 18);
 				sb.append(ch[index]);
 			}
+			for(int i=0;i<5;i++){
+				g.drawLine(r.nextInt(80), r.nextInt(40), r.nextInt(10), r.nextInt(40));
+			}
 			// 把验证码字符串放入Session
 			request.getSession().setAttribute("picCode", sb.toString());
 			// 在HttpServletResponse中写入验证码图片信息
