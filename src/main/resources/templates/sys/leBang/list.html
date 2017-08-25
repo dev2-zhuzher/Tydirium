@@ -3,13 +3,12 @@
 	layout:decorator="base/layout">
 <head>
 <title>乐邦权限管理</title> 
-<script src="/js/common/table/page.js"></script>
-<script src="/js/sys/module/list.js"></script>
+<script src="/js/common/table/page.js"></script> 
 </head>
 <body>
 <div layout:fragment="content">
-<blockquote class="layui-elem-quote">
-  <span class="layui-breadcrumb"> 
+<blockquote class="layui-elem-quote site-text">
+  <span class="layui-breadcrumb">  
 		<a href="">首页</a> 
 		<a href="">权限管理</a>
 		<a href="">乐邦权限管理</a>
@@ -19,6 +18,7 @@
 	<form class="layui-form" id="from" action="/admin/sys/lebang/info">
 		<input type="hidden" name="page" id="page" th:value="${pager.number}"/> 
 		<input type="hidden" name="size" id="size" th:value="${pager.size}"/> 
+		<input type="hidden" name="totalElements" id="totalElements" th:value="${pager.totalElements}"/>
 		  <div class="layui-inline">
 		    <label class="layui-form-label">岗位信息</label>
 		    <div class="layui-input-block">

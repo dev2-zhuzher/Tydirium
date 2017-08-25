@@ -4,7 +4,7 @@
 $(function() {
 	// 加载控件
 	layui .use( [ 'element','form', 'layedit', 'laydate' ], function() {
-		var form = layui.form(), layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
+		var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
  
 		// 自定义验证规则
 		form.verify({ 
@@ -13,6 +13,12 @@ $(function() {
 				var checkRole = $("input[name='moduleIds']").next(".layui-form-checked");
 				if(checkRole.length == 0){
 					return "关联模块必选";
+				}
+			},
+			roleName : function(value){
+				var roleName = $("input[name='name']").val();
+				if(roleName.indexOf("ROLE_") != 0){
+					return "角色名称必须以   ROLE_ 开头";
 				}
 			}
 		});
