@@ -40,7 +40,7 @@ public interface ParcelService {
 	 * 
 	 * @return
 	 */
-	PageInfo<List<Map<String, Object>>> getParcelList();
+	PageInfo<List<Map<String, Object>>> getParcelList(ParcelBase parcelBase);
 
 	/**
 	 * 查询当前项目取件位置列表

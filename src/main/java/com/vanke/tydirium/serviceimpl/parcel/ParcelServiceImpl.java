@@ -49,10 +49,10 @@ public class ParcelServiceImpl implements ParcelService {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public PageInfo<List<Map<String, Object>>> getParcelList() {
+	public PageInfo<List<Map<String, Object>>> getParcelList(ParcelBase parcelBase) {
 		PageInfo<List<Map<String, Object>>> page = new PageInfo<List<Map<String, Object>>>();
 		PageHelper.startPage(1, 10, true);
-		List<Map<String, Object>> result = this.parcelMapper.queryParcelList();
+		List<Map<String, Object>> result = this.parcelMapper.queryParcelList(parcelBase);
 		// 用PageInfo对结果进行包装
 		page = new PageInfo(result);
 		return page;

@@ -1,7 +1,4 @@
-﻿.site-demo-button div .layui-btn, .layui-inline, .layui-input-inline {
-	margin: 10px;
-}
-/* 必填选项红星 */
+﻿/* 必填选项红星 */
 .layui-form-label .required {
 	color: #e02222;
 	font-size: 12px;
@@ -11,4 +8,21 @@
 .myicon {
 	font-size: 30px !important;
 	color: #009688;
+}
+/* 改变table行高 */
+.layui-table-cell {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.layui-table-cell .layui-form-checkbox {
+	top: 12px;
+}
+
+.margin-top {
+	margin-top: 5px;
+}
+
+.layui-layer-msg {
+	color: #000000;
 }

@@ -6,10 +6,10 @@ window.onload=function(){
 	layui.define([ 'element', 'layer', 'util' , 'form' ], function(
 			exports) {
 		var $ = layui.jquery;
-		var element = layui.element();
+		var element = layui.element;
 		var layer = layui.layer;
 		var util = layui.util;
-		var form = layui.form();
+		var form = layui.form;
 		// 业务代码
 
 		exports('index', {});

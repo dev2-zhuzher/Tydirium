@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<title>模块管理</title>
+<script src="/js/parcel/table.js"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<blockquote class="layui-elem-quote site-text">
+			<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">权限管理</a>
+				<a href="">模块管理</a>
+			</span>
+		</blockquote>
+		<div>
+			<form class="layui-form" id="from" action="/admin/sys/modules">
+				<div class="layui-inline">
+					<label class="layui-form-label">模块名称</label>
+					<div class="layui-input-block">
+						<input type="text" name="queryModuleName" lay-verify=""
+							autocomplete="off" placeholder="" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<input class="layui-btn" lay-submit="" type="submit" value="查询"></input>
+				</div>
+				<div class="layui-inline">
+					<a href="/admin/parcel/create" class="layui-btn"><i class="layui-icon"></i></a>
+				</div>
+			</form>
+		</div>
+		<!-- table数据 -->
+		<table id="table"></table>
+		<!-- table工具栏 -->
+		<script type="text/html" id="tableBar">
+  			<a class="layui-btn layui-btn-small layui-btn-radius margin-top" lay-event="detail" href="/admin/parcel/{parceId}">查看</a> 
+		</script>
+	</div>
+</body>
+</html>

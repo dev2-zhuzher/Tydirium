@@ -242,6 +242,15 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function(exports){
         }, options.where)
         ,dataType: 'json'
         ,success: function(res){
+          if(res.code == undefined){
+        	  // 当前数据格式转换为mybatis-pagehelper格式使用，部分字段未解析
+        	  res = {
+        			  code: 0, //状态码，0代表成功，其它失败
+            		  msg: "加载成功", //状态信息，一般可为空 
+            		  count: ( res.total == null ? 0 : res.total ) ,//数据总量
+            		  data: ( res.list == null ? [{}] : res.list ) //数据，字段是任意的。
+        	  }; 
+          }
           if(res.code != 0){
             return layer.msg(res.msg);
           }

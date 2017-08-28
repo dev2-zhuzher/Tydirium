@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Select;
 
 import com.vanke.tydirium.model.dto.ItemType;
+import com.vanke.tydirium.model.dto.ParcelBase;
 import com.vanke.tydirium.model.dto.ParcelDetail;
 
 /**
@@ -40,7 +41,7 @@ public interface ParcelMapper {
 	 * 
 	 * @return
 	 */
-	public List<Map<String, Object>> queryParcelList();
+	public List<Map<String, Object>> queryParcelList(ParcelBase parcelBase);
 
 	/**
 	 * 查询邮包详情

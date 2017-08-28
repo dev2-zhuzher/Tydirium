@@ -3,8 +3,20 @@
 <mapper namespace="com.vanke.tydirium.mapper.ParcelMapper">
 
 	<!-- 分页查询邮包列表 -->
-	<select id="queryParcelList" resultType="java.util.HashMap">
-		select id , project_code  from t_parcel
+	<select id="queryParcelList" parameterType="com.vanke.tydirium.model.dto.ParcelBase" resultType="java.util.HashMap">
+		select
+		t1.id,
+		t1.project_name projectName,
+		t1.project_code projectCode,
+		t1.logistic_code logisticCode,
+		t1.shipper_code shipperCode,
+		t1.receive_address receiveAddress,
+		t1.fetch_mobile fetchMobile,
+		t1.create_time createTime
+		from t_parcel t1
+		<where>
+			
+		</where>
 	</select>
 </mapper>
 

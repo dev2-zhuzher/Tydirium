@@ -34,6 +34,28 @@ public class ParcelController {
 	private ParcelService parcelService;
 
 	/**
+	 * 跳转至邮包列表首页
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String toParcelListPage() {
+		return "/parcel/list";
+	}
+
+	/**
+	 * 分页查询代收邮包列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/lists", method = RequestMethod.POST)
+	@ResponseBody
+	public PageInfo<List<Map<String, Object>>> getParcelList(@RequestBody ParcelBase parcelBase) {
+		PageInfo<List<Map<String, Object>>> resultMap = this.parcelService.getParcelList(parcelBase);
+		return resultMap;
+	}
+
+	/**
 	 * 进入新建邮包页面
 	 * 
 	 * @param model
@@ -41,7 +63,7 @@ public class ParcelController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String toCreatePage(Model model) {
-		model.addAttribute("itemList", this.parcelService.getParcelList());// 获取物品类别字典
+		//model.addAttribute("itemList", this.parcelService.getParcelList());// 获取物品类别字典
 		model.addAttribute("positionList", this.parcelService.getCurrentPickupList());// 获取当前项目取件位置字典
 		return "";
 	}
@@ -56,18 +78,6 @@ public class ParcelController {
 	@ResponseBody
 	public ResponseInfo createParcel(@RequestBody ParcelBase parcel) {
 		return this.parcelService.createParcel(parcel);
-	}
-
-	/**
-	 * 分页查询代收邮包列表
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/lists", method = RequestMethod.POST)
-	@ResponseBody
-	public PageInfo<List<Map<String, Object>>> getParcelList() {
-		PageInfo<List<Map<String, Object>>> resultMap = this.parcelService.getParcelList();
-		return resultMap;
 	}
 
 	/**
