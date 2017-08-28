@@ -1,0 +1,122 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<meta charset="UTF-8">
+<title>新建代收</title>
+<link rel="stylesheet" href="/plugin/layui/css/layui.css">
+<script src="/plugin/layui/layui.js"></script>
+<script src="/js/common/table/page.js"></script> 
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  //各种基于事件的操作，下面会有进一步介绍
+});
+</script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<blockquote class="layui-elem-quote">
+			<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">邮包代收</a>
+				<a href="">新建代收</a>
+			</span>
+		</blockquote>
+
+		<fieldset class="layui-elem-field layui-field-title"
+			style="margin-top: 20px;">
+			<legend>新建代收</legend>
+		</fieldset>
+		<form class="layui-form layui-form-pane" style="text-align: center;"
+			action="/admin/sys/resource" method="post" id="addForm">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">运单编号<span class="required">
+							* </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="name" lay-verify="required"
+							autocomplete="off" class="layui-input"
+							th:value="${resource} == null ? '' : (${resource.name} == null ? '' : ${resource.name} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">快递公司<span class="required">
+							* </span></label>
+					<div class="layui-input-block">
+						<select name="city" lay-verify="required">
+							<option value=""></option>
+							<option value="0">北京</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label" style="padding: 8px 1px;">收件人手机号<span
+						class="required"> * </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="priority" lay-verify="required|number"
+							autocomplete="off" class="layui-input"
+							th:value="${resource} == null ? '' : (${resource.priority} == null ? '' : ${resource.priority} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label" style="padding: 8px 1px;">收件人地址<span class="required">
+							* </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="description" lay-verify=""
+							autocomplete="off" class="layui-input"
+							th:value="${resource} == null ? '' : (${resource.description} == null ? '' : ${resource.description} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label" style="padding: 8px 1px;">收件人姓名<span class="required">
+							* </span></label>
+					<div class="layui-input-block">
+						<input type="text" name="priority" lay-verify="required|number"
+							autocomplete="off" class="layui-input"
+							th:value="${resource} == null ? '' : (${resource.priority} == null ? '' : ${resource.priority} )">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">取件位置<span class="required">
+							* </span></label>
+					<div class="layui-input-block">
+						<select name="city" lay-verify="required">
+							<option value=""></option>
+							<option value="0">幸福驿站前台</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">物品类型</label>
+					<div class="layui-input-block">
+						<input type="checkbox" name="like[write]" title="写作"> <input
+							type="checkbox" name="like[read]" title="阅读" checked> <input
+							type="checkbox" name="like[dai]" title="发呆">
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-text" style="padding: 0px 30% 10px 30%;">
+					<label class="layui-form-label">留言</label>
+					<div class="layui-input-block">
+						<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+					</div>
+			</div>
+			<div class="layui-form-item">
+				<button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+				<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

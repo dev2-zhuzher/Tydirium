@@ -1,0 +1,118 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+<head>
+<meta charset="UTF-8">
+<title>邮包详情(已取)</title>
+<link rel="stylesheet" href="/plugin/layui/css/layui.css">
+<link rel="stylesheet" href="/css/parcel.css">
+<script src="/plugin/layui/layui.js"></script>
+<script src="/js/common/table/page.js"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  //各种基于事件的操作，下面会有进一步介绍
+});
+</script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<blockquote class="layui-elem-quote">
+			<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">邮包代收</a>
+				<a href="">代收详情</a>
+			</span>
+		</blockquote>
+		<fieldset class="layui-elem-field layui-field-title"
+			style="margin-top: 20px;">
+			<legend>代收详情</legend>
+		</fieldset>
+		<div style="text-align: center;">
+			<table class="layui-table parcel-table" lay-even lay-skin="nob">
+				<thead>
+					<tr>
+						<th>邮包ID
+						<td>1123</td>
+						</th>
+					</tr>
+					<tr>
+						<th>邮包状态
+						<td>已取</td>
+						</th>
+					</tr>
+					<tr>
+						<th>快递公司
+						<td>顺丰快递</td>
+						</th>
+					</tr>
+					<tr>
+						<th>运单编号
+						<td>123456</td>
+						</th>
+					</tr>
+					<tr>
+						<th>代收时间
+						<td>2017-06-26</td>
+						</th>
+					</tr>
+					<tr>
+						<th>物品类别
+						<td>贤心</td>
+						</th>
+					</tr>
+				</thead>
+			</table>
+			<br />
+			<table class="layui-table parcel-table" lay-even lay-skin="nob">
+				<thead>
+					<tr>
+						<th>收件人
+						<td>张三</td>
+						</th>
+					</tr>
+					<tr>
+						<th>收件人手机号
+						<td>1308888888</td>
+						</th>
+					</tr>
+					<tr>
+						<th>收件地址
+						<td>梅林万科</td>
+						</th>
+					</tr>
+					<tr>
+						<th>取件位置
+						<td>幸福驿站前台</td>
+						</th>
+					</tr>
+					<tr>
+						<th>取件人手机号
+						<td>1584545646</td>
+						</th>
+					</tr>
+					<tr>
+						<th>取件时间
+						<td>2017-06-26</td>
+						</th>
+					</tr>
+				</thead>
+			</table>
+			<hr class="layui-bg-red">
+			<br />
+			<table class="layui-table parcel-table" lay-even lay-skin="nob">
+				<thead>
+					<tr>
+						<th>备注
+						<td>的算法第三方</td>
+						</th>
+					</tr>
+					<tr>
+						<th>时间
+						<td>2017-06-26</td>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

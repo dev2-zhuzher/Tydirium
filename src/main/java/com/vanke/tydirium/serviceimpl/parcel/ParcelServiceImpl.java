@@ -40,6 +40,13 @@ public class ParcelServiceImpl implements ParcelService {
 
 	@Autowired
 	private ParcelMapper parcelMapper;
+	
+	/****************** 邮包状态 ******************/
+	// 已取
+	public static final Integer NOT_TOKEN = 1;
+	
+	// 未取
+	public static final Integer HAS_TAKEN = 2;
 
 	/**
 	 * 分页查询代收邮包列表
@@ -67,16 +74,52 @@ public class ParcelServiceImpl implements ParcelService {
 	 */
 	@Override
 	public ResponseInfo createParcel(ParcelBase parcel) {
-		// 参数判断
+		// 运单号
+		if (StringUtils.isBlank(parcel.getLogisticCode())) {
+			return ResponseInfo.getFailInstance("运单号不能为空");
+		}
+		// 快递公司
+		if (StringUtils.isBlank(parcel.getShipperCode())) {
+			return ResponseInfo.getFailInstance("快递公司不能为空");
+		}
+		// 收件人手机号
+		if (StringUtils.isBlank(parcel.getReceiverMobile())) {
+			return ResponseInfo.getFailInstance("收件人手机号不能为空");
+		} else {
+			// 格式判断
+		}
+		// 收件人地址
+		if (StringUtils.isBlank(parcel.getReceiveAddress())) {
+			return ResponseInfo.getFailInstance("收件人地址不能为空");
+		}
+		// 收件人姓名
+		if (StringUtils.isBlank(parcel.getReceiverName())) {
+			return ResponseInfo.getFailInstance("收件人姓名不能为空");
+		}
+		// 取件位置
+		if (parcel.getPositionId() == null) {
+			return ResponseInfo.getFailInstance("取件位置不能为空");
+		}
 
+		// 填充项目编号、项目名称
+		parcel.setProjectCode(UserThreadLocal.getCurrUser().getProjectCode());
+		parcel.setProjectName(UserThreadLocal.getCurrUser().getProjectName());
+		
+//		parcel.setProjectCode("1000");
+//		parcel.setProjectName("梅林万科");
+		
 		// 生成取件码
+		String pickupCode = "12345";
+		parcel.setPickupCode(pickupCode);
 
 		// 根据手机号码查询houseCode[不是注册用户则为空]
-
+		String houseCode = "";
+		parcel.setHouseCode(houseCode);
+		
 		// 数据库插入邮包记录
+		this.parcelMapper.insertParcelRecored(parcel);
 
 		// 如果是注册用户，则推送消息；否则发送短信
-		
 		// TODO
 
 		return ResponseInfo.getSuccessInstance();
@@ -153,7 +196,7 @@ public class ParcelServiceImpl implements ParcelService {
 	public ResponseInfo addRemark(ParcelRemark remark) {
 		// 判断邮包状态
 		Integer status = this.parcelMapper.queryParcelStatus(remark.getParcelId());
-		if (status == null || status.equals(Integer.valueOf(2))) {
+		if (status == null || status.equals(HAS_TAKEN)) {
 			return ResponseInfo.getFailInstance("邮包不存在或邮包状态非法");
 		}
 		// 备注内容判断
@@ -164,7 +207,8 @@ public class ParcelServiceImpl implements ParcelService {
 		// 填充备注人手机号码
 		remark.setMobile(UserThreadLocal.getCurrUser().getMobile());
 		
-		// 插入备注记录 TODO
+		// 插入备注记录
+		this.parcelMapper.insertRemarkRecored(remark);
 
 		return ResponseInfo.getSuccessInstance();
 	}
