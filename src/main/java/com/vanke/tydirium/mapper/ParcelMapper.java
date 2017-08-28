@@ -3,11 +3,14 @@ package com.vanke.tydirium.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.vanke.tydirium.model.dto.ItemType;
+import com.vanke.tydirium.model.dto.ParcelBase;
 import com.vanke.tydirium.model.dto.ParcelDetail;
+import com.vanke.tydirium.model.dto.ParcelRemark;
 
 /**
  * 
@@ -33,7 +36,7 @@ public interface ParcelMapper {
 	 * @param projectCode
 	 * @return
 	 */
-	@Select("select id, position from t_project_pickup where project_code = #{0}")
+	@Select("select id, position from t_pickup_position where project_code = #{0}")
 	List<Map<Long, Object>> getPickupPositionList(String projectCode);
 
 	/**
@@ -69,5 +72,22 @@ public interface ParcelMapper {
 	 */
 	@Select("select status from t_parcel where id = #{0}")
 	Integer queryParcelStatus(Long parcelId);
+
+	/**
+	 * 插入邮包备注记录
+	 * 
+	 * @param remark
+	 * @return
+	 */
+	@Insert("insert into t_parcel_remark (parcel_id, remark, mobile) values (parcelId, remark, remark)")
+	int insertRemarkRecored(ParcelRemark remark);
+
+	/**
+	 * 插入邮包记录
+	 * 
+	 * @param parcel
+	 * @return
+	 */
+	int insertParcelRecored(ParcelBase parcel);
 
 }

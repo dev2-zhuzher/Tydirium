@@ -17,29 +17,11 @@ public class ParcelBase implements Serializable {
 	// 邮包ID
 	private Long parcelId;
 
-	// 项目code
-	private String projectCode;
-
-	// 项目名称
-	private String projectName;
-
-	// 物品类型ID
-	private Long itemId;
-
-	// 取件码
-	private String fetchCode;
-
-	// 物流编号
+	// 运单编号
 	private String logisticCode;
 
 	// 物流公司编号
 	private String shipperCode;
-
-	// 收件人房屋编号
-	private String houseCode;
-
-	// 收件人姓名
-	private String receiverName;
 
 	// 收件人手机号码
 	private String receiverMobile;
@@ -47,8 +29,32 @@ public class ParcelBase implements Serializable {
 	// 收件人地址
 	private String receiveAddress;
 
+	// 收件人姓名
+	private String receiverName;
+
+	// 取件位置ID
+	private Long positionId;
+
+	// 物品类型ID集合，多个ID用逗号分隔
+	private String itemIds;
+
+	// 备注信息
+	private String remark;
+
+	// 项目code
+	private String projectCode;
+
+	// 项目名称
+	private String projectName;
+
+	// 取件码
+	private String pickupCode;
+
+	// 收件人房屋编号
+	private String houseCode;
+
 	// 实际取件人手机号
-	private String fetchMobile;
+	private String pickupMobile;
 
 	public Long getParcelId() {
 		return parcelId;
@@ -56,38 +62,6 @@ public class ParcelBase implements Serializable {
 
 	public void setParcelId(Long parcelId) {
 		this.parcelId = parcelId;
-	}
-
-	public String getProjectCode() {
-		return projectCode;
-	}
-
-	public void setProjectCode(String projectCode) {
-		this.projectCode = projectCode;
-	}
-
-	public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-	public Long getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
-	}
-
-	public String getFetchCode() {
-		return fetchCode;
-	}
-
-	public void setFetchCode(String fetchCode) {
-		this.fetchCode = fetchCode;
 	}
 
 	public String getLogisticCode() {
@@ -106,22 +80,6 @@ public class ParcelBase implements Serializable {
 		this.shipperCode = shipperCode;
 	}
 
-	public String getHouseCode() {
-		return houseCode;
-	}
-
-	public void setHouseCode(String houseCode) {
-		this.houseCode = houseCode;
-	}
-
-	public String getReceiverName() {
-		return receiverName;
-	}
-
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
-	}
-
 	public String getReceiverMobile() {
 		return receiverMobile;
 	}
@@ -138,12 +96,78 @@ public class ParcelBase implements Serializable {
 		this.receiveAddress = receiveAddress;
 	}
 
-	public String getFetchMobile() {
-		return fetchMobile;
+	public String getReceiverName() {
+		return receiverName;
 	}
 
-	public void setFetchMobile(String fetchMobile) {
-		this.fetchMobile = fetchMobile;
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
 	}
+
+	public Long getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(Long positionId) {
+		this.positionId = positionId;
+	}
+
+	public String getItemIds() {
+		return itemIds;
+	}
+
+	public void setItemIds(String itemIds) {
+		this.itemIds = itemIds;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getPickupCode() {
+		return pickupCode;
+	}
+
+	public void setPickupCode(String pickupCode) {
+		this.pickupCode = pickupCode;
+	}
+
+	public String getHouseCode() {
+		return houseCode;
+	}
+
+	public void setHouseCode(String houseCode) {
+		this.houseCode = houseCode;
+	}
+
+	public String getPickupMobile() {
+		return pickupMobile;
+	}
+
+	public void setPickupMobile(String pickupMobile) {
+		this.pickupMobile = pickupMobile;
+	}
+	
+	
 
 }

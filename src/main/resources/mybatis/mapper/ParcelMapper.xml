@@ -6,5 +6,13 @@
 	<select id="queryParcelList" resultType="java.util.HashMap">
 		select id , project_code  from t_parcel
 	</select>
+	
+	<!-- 插入邮包记录 -->
+	<insert id="insertParcelRecored" parameterType="com.vanke.tydirium.model.dto.ParcelBase">
+		insert into t_parcel 
+			(project_code, project_name, item_ids, pickup_code, logistic_code, shipper_code, house_code, receiver_name, receiver_mobile, receive_address) 
+		values 
+			(#{projectCode}, #{projectName}, #{itemIds}, #{pickupCode}, #{logisticCode}, #{shipperCode}, #{houseCode}, #{receiverName}, #{receiverMobile}, #{receiveAddress});
+	</insert>
 </mapper>
 
