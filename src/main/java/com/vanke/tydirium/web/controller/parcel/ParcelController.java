@@ -96,12 +96,14 @@ public class ParcelController {
 	/**
 	 * 添加邮包备注【注意：处于“未取”状态的才能添加备注】
 	 * 
+	 * @param parcelId
 	 * @param remark
 	 * @return
 	 */
-	@RequestMapping(value = "/remark", method = RequestMethod.POST)
+	@RequestMapping(value = "/remark/{parcelId}", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseInfo addRemark(@RequestBody ParcelRemark remark) {
+	public ResponseInfo addRemark(@PathVariable("parcelId") Long parcelId, @RequestBody ParcelRemark remark) {
+		remark.setParcelId(parcelId);
 		return this.parcelService.addRemark(remark);
 	}
 
@@ -116,4 +118,6 @@ public class ParcelController {
 	public ResponseInfo pickupParcel(@PathVariable("parcelId") Long parcelId, @RequestBody String jsonParam) {
 		return this.parcelService.pickupParcel(parcelId, jsonParam);
 	}
+	
+	
 }
